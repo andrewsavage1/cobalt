@@ -97,7 +97,7 @@ static_library("h5vcc") {
     ]
     deps += [
       "//net:cobalt_dial_server",
-      "//net:http_server",
+      "//net/server:http_server",
     ]
   }
 
