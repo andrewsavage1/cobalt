@@ -3108,7 +3108,6 @@ source_set("arm_bti_testfunctions") {
 }
 
 test("base_unittests") {
-  # sources = ["values_unittest.cc",]
   sources = [
     # "allocator/dispatcher/dispatcher_unittest.cc",
     # "allocator/dispatcher/initializer_unittest.cc",
@@ -3548,14 +3547,14 @@ test("base_unittests") {
     ":arm_bti_testfunctions",
     ":base",
 
-    # ":base_stack_sampling_profiler_test_util",
+    ":base_stack_sampling_profiler_test_util",
     ":feature_list_buildflags",
     ":i18n",
     ":sanitizer_buildflags",
     "//base/allocator:buildflags",
     "//base/test:native_library_test_utils",
     "//base/test:run_all_unittests",
-    # "//base/test:test_support",
+    "//base/test:test_support",
     "//base/third_party/dynamic_annotations",
     "//build:blink_buildflags",
     "//build:chromecast_buildflags",
@@ -3569,9 +3568,9 @@ test("base_unittests") {
   defines = [ "U_COMMON_IMPLEMENTATION" ]
 
   data_deps = [
-    # "//base/test:immediate_crash_test_helper",
-    # "//base/test:test_child_process",
-    # "//base/test:test_shared_library",
+    "//base/test:immediate_crash_test_helper",
+    "//base/test:test_child_process",
+    "//base/test:test_shared_library",
     # "//testing/buildbot/filters:base_unittests_filters",
   ]
 
