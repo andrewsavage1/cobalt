@@ -112,7 +112,7 @@ config("target") {
 
     if (is_starboard) {
       configs = [ ":starboard" ]
-    } else if (is_native_target_build) {
+    } else if (is_native_target_build || true) {
       configs = [ ":native_target_build" ]
     }
   }

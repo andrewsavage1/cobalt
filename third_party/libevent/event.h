@@ -202,9 +202,9 @@ typedef unsigned short u_short;
 #define EV_SIGNAL	0x08
 #define EV_PERSIST	0x10	/* Persistant event */
 
-#ifdef STARBOARD
+#if 1
 struct evtimeval {
-#if SB_IS(64_BIT)
+#if 1
 	int64_t	tv_sec;		/* seconds */
 	int64_t	tv_usec;	/* and microseconds */
 #else
@@ -241,7 +241,7 @@ struct event {
 	short ev_ncalls;
 	short *ev_pncalls;	/* Allows deletes in callback */
 
-#if defined(STARBOARD)
+#if 1
 	struct evtimeval ev_timeout;
 #else
   struct timeval ev_timeout;

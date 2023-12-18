@@ -109,6 +109,7 @@
 #ifndef OPENSSL_HEADER_CRYPTO_INTERNAL_H
 #define OPENSSL_HEADER_CRYPTO_INTERNAL_H
 
+#include <openssl/base.h>
 #include <openssl/ex_data.h>
 #include <openssl/mem.h>
 #include <openssl/stack.h>

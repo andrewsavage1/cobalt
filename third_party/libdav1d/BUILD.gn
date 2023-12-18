@@ -17,9 +17,9 @@ import("dav1d_generated.gni")
 import("//build/config/compiler/compiler.gni")
 import("//build/config/sanitizers/sanitizers.gni")
 
-assert(use_cobalt_customizations)
+# assert(use_cobalt_customizations)
 
-if (is_starboard) {
+if (true) {
   import("//starboard/build/nasm_assemble.gni")
 } else {
   import("//third_party/nasm/nasm_assemble.gni")

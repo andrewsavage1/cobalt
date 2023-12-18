@@ -101,9 +101,9 @@ template("proto_library") {
   # Platform files should have gotten filtered out in the sources assignment
   # when this template was invoked. If they weren't, it was on purpose and
   # this template shouldn't re-apply the filter.
-  if (!use_cobalt_customizations) {
-    set_sources_assignment_filter([])
-  }
+  # if (!use_cobalt_customizations) {
+  #   set_sources_assignment_filter([])
+  # }
 
   if (host_os == "win") {
     host_executable_suffix = ".exe"

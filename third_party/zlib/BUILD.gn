@@ -204,7 +204,7 @@ source_set("zlib_inflate_chunk_simd") {
       "contrib/optimizations/inflate.c",
     ]
 
-    if (!is_win && use_cobalt_customizations) {
+    if (!is_win && use_cobalt_customizations || true) {
       cflags_c = [ "-Wno-unused-function" ]
       if (is_clang_16) {
         cflags_c += [
@@ -348,7 +348,7 @@ component("zlib_hidden") {
   deps = []
   cflags_c = []
 
-  if (is_clang_16 && use_cobalt_customizations) {
+  if (is_clang_16 && use_cobalt_customizations || true) {
     cflags_c += [
       "-Wno-deprecated-non-prototype",
       "-Wno-unused-but-set-variable",
@@ -398,7 +398,7 @@ component("zlib_hidden") {
       "gzread.c",
       "gzwrite.c",
     ]
-  } else if (!is_native_target_build) {
+  } else if (false) {
     configs -= [ "//build/config/compiler:chromium_code" ]
   }
   configs += [
@@ -415,7 +415,7 @@ component("zlib_hidden") {
   allow_circular_includes_from = deps
 }
 
-if (use_cobalt_customizations) {
+if (use_cobalt_customizations || true) {
   config("zlib_all_dependent_config") {
     # To prevent Zlib ever from redefining const keyword in zconf.h
     defines = [ "STDC" ]
@@ -477,7 +477,7 @@ static_library("minizip") {
       "contrib/minizip/iostarboard.h",
     ]
     deps += [ "//starboard:starboard_headers_only" ]
-  } else if (!is_native_target_build) {
+  } else if (false) {
     configs -= [ "//build/config/compiler:chromium_code" ]
   }
   configs += [
@@ -499,7 +499,7 @@ if (!is_starboard) {
     ]
 
     if (!is_debug) {
-      if (!is_native_target_build) {
+      if (false) {
         configs -= [ "//build/config/compiler:default_optimization" ]
       }
       configs += [ "//build/config/compiler:optimize_speed" ]

@@ -38,19 +38,20 @@ config("platform_configuration") {
     "-ffunction-sections",
     "-fdata-sections",
     "-fPIC",
-    "-nostdlibinc",
-    "-isystem" + rebase_path("//third_party/llvm-project/libcxxabi/include",
-                             root_build_dir),
-    "-isystem" + rebase_path("//third_party/llvm-project/libunwind/include",
-                             root_build_dir),
-    "-isystem" + rebase_path("//third_party/llvm-project/libcxx/include",
-                             root_build_dir),
-    "-isystem" + rebase_path("//third_party/musl/include", root_build_dir),
-    "-isystem" + rebase_path("//third_party/musl/arch/generic", root_build_dir),
+
+    # "-nostdlibinc",
+    # "-isystem" + rebase_path("//third_party/llvm-project/libcxxabi/include",
+    #                          root_build_dir),
+    # "-isystem" + rebase_path("//third_party/llvm-project/libunwind/include",
+    #                          root_build_dir),
+    # "-isystem" + rebase_path("//third_party/llvm-project/libcxx/include",
+    #                          root_build_dir),
+    # "-isystem" + rebase_path("//third_party/musl/include", root_build_dir),
+    # "-isystem" + rebase_path("//third_party/musl/arch/generic", root_build_dir),
   ]
 
   cflags_cc = [
-    "-nostdinc++",
+    # "-nostdinc++",
     "-std=c++17",
   ]
 

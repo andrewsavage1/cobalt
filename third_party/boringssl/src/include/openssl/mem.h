@@ -66,7 +66,6 @@
 extern "C" {
 #endif
 
-
 // Memory and string functions, see also buf.h.
 //
 // BoringSSL has its own set of allocation functions, which keep track of
@@ -141,7 +140,6 @@ OPENSSL_EXPORT int BIO_vsnprintf(char *buf, size_t n, const char *format,
 #define CRYPTO_malloc OPENSSL_malloc
 #define CRYPTO_realloc OPENSSL_realloc
 #define CRYPTO_free OPENSSL_free
-
 
 #if defined(__cplusplus)
 }  // extern C

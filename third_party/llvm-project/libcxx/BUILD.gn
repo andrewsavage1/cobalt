@@ -50,7 +50,7 @@ config("cxx_config") {
   ]
 
   include_dirs = [
-    "include",
+    # "include",
     "src",
     "//third_party/llvm-project/libcxxabi/include",
   ]

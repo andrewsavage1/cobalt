@@ -71,7 +71,7 @@
 #endif
 
 #if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS)
-#include "third_party/test_fonts/fontconfig/fontconfig_util_linux.h"
+// #include "third_party/test_fonts/fontconfig/fontconfig_util_linux.h"
 #endif
 
 #if BUILDFLAG(IS_FUCHSIA)
@@ -654,7 +654,7 @@ void TestSuite::Initialize() {
 
 #if defined(STARBOARD)
 #elif BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS)
-  test_fonts::SetUpFontconfig();
+  // test_fonts::SetUpFontconfig();
 #endif
 
   // Add TestEventListeners to enforce certain properties across tests.

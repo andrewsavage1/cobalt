@@ -346,4 +346,4 @@ if (!use_cobalt_customizations) {
   include_dirs = [ "$os_include" ]
 }
 
-group("xml_reader") {}
+# group("xml_reader") {}

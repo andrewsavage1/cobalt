@@ -97,7 +97,7 @@ declare_args() {
       angle_has_build && ((is_win && !angle_is_winuwp) ||
                           (is_linux && angle_use_x11 && !is_chromeos) ||
                           (is_android && ndk_api_level_at_least_26) ||
-                          is_fuchsia || is_ggp || is_mac) && !is_starboard
+                          is_fuchsia || is_ggp || is_mac) && !is_starboard && false
   angle_enable_null = true
   angle_enable_essl = true
   angle_enable_glsl = true
@@ -111,7 +111,7 @@ declare_args() {
   # SwiftShader is not needed on Fuchsia because Vulkan is supported on all
   # devices that run Fuchsia.
   angle_enable_swiftshader = angle_enable_vulkan && !is_android &&
-                             !is_fuchsia && !is_ggp && !is_starboard
+                             !is_fuchsia && !is_ggp && !is_starboard && false
 
   angle_enable_gl_null = angle_enable_gl
   angle_enable_hlsl = angle_enable_d3d9 || angle_enable_d3d11
@@ -145,13 +145,13 @@ if (is_starboard) {
 angle_remove_configs = []
 
 if (angle_has_build && !is_starboard) {
-  angle_remove_configs += [ "//build/config/compiler:default_include_dirs" ]
+  # angle_remove_configs += [ "//build/config/compiler:default_include_dirs" ]
 }
 angle_better_stack_traces =
     (is_debug || dcheck_always_on) && is_linux && !is_asan && !is_cfi
 
 if (angle_has_build && is_clang && !is_starboard) {
-  angle_remove_configs += [ "//build/config/clang:find_bad_constructs" ]
+  # angle_remove_configs += [ "//build/config/clang:find_bad_constructs" ]
 
   # Disabled to enable better stack traces.
   if (angle_better_stack_traces) {

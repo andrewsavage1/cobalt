@@ -20,7 +20,7 @@ declare_args() {
 
   build_type = "devel"
 
-  is_starboard = true
+  is_starboard = false
 
   # Used to guard any customizations to Chromium or third-party code for builds
   # where the Starboard porting layer is not used.
@@ -50,7 +50,7 @@ assert(!(is_starboard && is_native_target_build),
 # sense that it is functionally equivalent to
 # (is_starboard || is_native_target_build), but it should be used in lieu of
 # that since the intent is more clear.
-use_cobalt_customizations = true
+use_cobalt_customizations = false
 
 is_debug = build_type == "debug"
 is_devel = build_type == "devel"
@@ -411,7 +411,7 @@ template("evergreen_loader") {
       deps += invoker.deps
     }
     foreach(dep, shared_data_deps) {
-      deps += [ "${dep}_install_content" ]
+      # deps += [ "${dep}_install_content" ]
     }
     if (separate_install_targets_for_bundling) {
       deps += [ ":copy_loader_app_lib${original_target_name}_bundle_content" ]
@@ -464,7 +464,7 @@ template("executable") {
         spl = []
         spl = string_split(dep, "(")
         if ([ spl[0] ] == spl) {
-          deps += [ "${dep}_install_content" ]
+          # deps += [ "${dep}_install_content" ]
         }
       }
       if (separate_install_targets_for_bundling) {
@@ -593,7 +593,7 @@ template("shared_library") {
         spl = []
         spl = string_split(dep, "(")
         if ([ spl[0] ] == spl) {
-          deps += [ "${dep}_install_content" ]
+          # deps += [ "${dep}_install_content" ]
         }
       }
       if (separate_install_targets_for_bundling) {

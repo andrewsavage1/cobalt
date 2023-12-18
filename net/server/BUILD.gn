@@ -4,6 +4,7 @@
 
 import("//net/features.gni")
 import("//testing/libfuzzer/fuzzer_test.gni")
+import("//build/config/sanitizers/sanitizers.gni")
 
 static_library("http_server") {
   public = []

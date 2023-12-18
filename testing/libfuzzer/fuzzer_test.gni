@@ -13,3 +13,4 @@
 # limitations under the License.
 
 # Intentionally empty, serves as a build stub
+import("//testing/test.gni")

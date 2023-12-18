@@ -30,7 +30,7 @@ source_set("libjpeg_headers") {
 }
 
 if (nasm_exists && (current_cpu == "x86" || current_cpu == "x64")) {
-  if (is_starboard) {
+  if (is_starboard || true) {
     import("//starboard/build/nasm_assemble.gni")
   } else {
   import("//third_party/nasm/nasm_assemble.gni")

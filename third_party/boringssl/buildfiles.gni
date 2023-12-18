@@ -370,7 +370,7 @@ boringssl_crypto_files = [
 ]
 if (is_starboard) {
   boringssl_crypto_files += [ "$boringssl_root/crypto/mem_starboard.c" ]
-} else if (is_native_target_build) {
+} else if (is_native_target_build || true) {
   boringssl_crypto_files += [
     "$boringssl_root/crypto/mem.c",
     "$boringssl_root/crypto/mem_native_target.c",

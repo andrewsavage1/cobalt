@@ -289,3 +289,7 @@
 /* Define to the type of an unsigned integer type of width exactly 32 bits if
    such a type exists and the standard includes do not define it. */
 /* #undef uint32_t */
+
+#define XML_REALLOC realloc
+#define XML_FREE free
+#define XML_MALLOC malloc

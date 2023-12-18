@@ -176,12 +176,14 @@ if (current_toolchain == starboard_toolchain &&
     build_with_separate_cobalt_toolchain) {
   declare_args() {
     # Target-specific configurations for executable targets.
-    executable_configs =
-        [ "//build/config/gcc:rpath_for_built_shared_libraries" ]
+    executable_configs = []
+
+    # [ "//build/config/gcc:rpath_for_built_shared_libraries" ]
 
     # Target-specific configurations for shared_library targets.
-    shared_library_configs =
-        [ "//build/config/gcc:rpath_for_built_shared_libraries" ]
+    shared_library_configs = []
+
+    # [ "//build/config/gcc:rpath_for_built_shared_libraries" ]
   }
 } else {
   declare_args() {

@@ -2292,15 +2292,34 @@ GTEST_DISABLE_MSC_DEPRECATED_POP_()
 [[noreturn]] void Abort();
 #else
 [[noreturn]] inline void Abort() { abort(); }
+
+inline void VPrintF(const char* format, va_list args) {
+  vprintf(format, args);
+}
+inline void PrintF(const char* format, ...) {
+  va_list args;
+  __builtin_va_start(args, format);
+  vprintf(format, args);
+  __builtin_va_end(args);
+}
+inline void Flush() { fflush(stderr); }
+inline void *Malloc(size_t n) { return malloc(n); }
+inline void Free(void *p) { return free(p); }
+inline const char *StrRChr(const char *str, char c) {
+  return strrchr(str, c);
+}
+inline int MkDir(const char* path, int mode) {
+  return mkdir(path, mode) ? 0 : -1;
+}
 #endif  // GTEST_OS_WINDOWS_MOBILE
 
 #endif  // GTEST_OS_STARBOARD
 
 inline void SNPrintF(char* out_buffer, size_t size, const char* format,...) {
   va_list args;
-  va_start(args, format);
-  VSNPrintF(out_buffer, size, format, args);
-  va_end(args);
+  __builtin_va_start(args, format);
+  vsnprintf(out_buffer, size, format, args);
+  __builtin_va_end(args);
 }
 
 }  // namespace posix

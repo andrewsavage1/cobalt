@@ -208,10 +208,10 @@ static_library("test_support") {
     ]
   }
 
-  if (!use_cobalt_customizations && (is_linux || is_chromeos)) {
-    sources += [ "test_file_util_linux.cc" ]
-    public_deps += [ "//third_party/test_fonts/fontconfig:test_support" ]
-  }
+  # if (!use_cobalt_customizations && (is_linux || is_chromeos)) {
+  #   sources += [ "test_file_util_linux.cc" ]
+  #   public_deps += [ "//third_party/test_fonts/fontconfig:test_support" ]
+  # }
 
   if (is_mac) {
     frameworks = [ "AppKit.framework" ]
@@ -266,9 +266,9 @@ static_library("test_support") {
 
   if (is_posix || is_fuchsia) {
     sources += [
-      # "scoped_locale.cc",
-      # "scoped_locale.h",
-      # "test_file_util_posix.cc",
+      "scoped_locale.cc",
+      "scoped_locale.h",
+      "test_file_util_posix.cc",
     ]
   }
 
@@ -339,6 +339,8 @@ source_set("test_support_perf") {
 static_library("run_all_unittests") {
   testonly = true
   sources = [ "run_all_unittests.cc" ]
+  include_dirs = ["//third_party/abseil-cpp"]
+  # deps = ["//testing/gtest"]
   deps = [ ":test_support" ]
 }
 

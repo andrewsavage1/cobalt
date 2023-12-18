@@ -725,7 +725,7 @@ angle_source_set("libANGLE_base") {
 
   # Enable extra Chromium style warnings for libANGLE.
   if (is_clang && angle_has_build && !is_starboard) {
-    suppressed_configs -= [ "//build/config/clang:find_bad_constructs" ]
+    # suppressed_configs -= [ "//build/config/clang:find_bad_constructs" ]
   }
 
   # Shared D3D sources.
@@ -1164,8 +1164,9 @@ foreach(is_shared_library,
     dep_suffix = "_static"
   }
 
+  not_needed([ "dep_suffix" ])
   if (is_starboard) {
-    not_needed([ "dep_suffix", "library_type" ])
+    not_needed([ "library_type" ])
     group(library_name) {
       deps = [
         ":angle_common",

@@ -17,7 +17,7 @@ if (is_starboard && is_starboardized_toolchain) {
 
 config("external_config") {
   include_dirs = [ "$boringssl_root/include" ]
-  if (use_cobalt_customizations) {
+  if (use_cobalt_customizations || true) {
     include_dirs += [ openssl_config_path ]
   }
 }
@@ -152,7 +152,7 @@ static_library("crypto") {
         }
       }
     }
-  } else if (is_native_target_build)  {
+  } else if (is_native_target_build || true)  {
     if (is_linux || is_android) {
       if (asm_target_arch == "x64") {
         sources += boringssl_linux_x86_64_files

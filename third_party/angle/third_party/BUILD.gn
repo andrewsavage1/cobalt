@@ -5,7 +5,7 @@
 # See:
 # https://chromium.googlesource.com/chromium/src/+/master/third_party/BUILD.gn
 
-import("//third_party/libjpeg.gni")
+import("//third_party/angle/third_party/libjpeg.gni")
 
 assert(!is_ios, "This is not used on iOS, don't drag it in unintentionally")
 
@@ -26,7 +26,7 @@ group("jpeg") {
     public_configs = [ ":system_libjpeg_config" ]
   } else if (use_libjpeg_turbo) {
     public_deps = [
-      "//third_party/libjpeg_turbo:libjpeg",
+      "//third_party/libjpeg-turbo:libjpeg",
     ]
     public_configs = [ ":libjpeg_turbo_config" ]
   } else {
@@ -44,7 +44,7 @@ group("jpeg_includes") {
   if (use_system_libjpeg) {
     public_configs = [ ":system_libjpeg_config" ]
   } else if (use_libjpeg_turbo) {
-    public_configs = [ "//third_party/libjpeg_turbo:libjpeg_config" ]
+    public_configs = [ "//third_party/libjpeg-turbo:libjpeg_config" ]
   } else {
     public_configs = [ "//third_party/libjpeg:libjpeg_config" ]
   }

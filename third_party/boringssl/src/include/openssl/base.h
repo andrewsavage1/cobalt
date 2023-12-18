@@ -53,7 +53,6 @@
 #ifndef OPENSSL_HEADER_BASE_H
 #define OPENSSL_HEADER_BASE_H
 
-
 // This file should be the first included by all BoringSSL headers.
 
 #include <stddef.h>
@@ -71,10 +70,10 @@
 #include <openssl/is_boringssl.h>
 #include <openssl/opensslconf.h>
 
+
 #if defined(__cplusplus)
 extern "C" {
 #endif
-
 
 #if defined(__x86_64) || defined(_M_AMD64) || defined(_M_X64)
 #define OPENSSL_64_BIT

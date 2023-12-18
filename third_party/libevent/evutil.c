@@ -185,7 +185,7 @@ evutil_make_socket_nonblocking(int fd)
 	}
 #else
 #ifdef HAVE_FCNTL
-		{
+		
 	{
 		int flags;
 		if ((flags = fcntl(fd, F_GETFL, NULL)) < 0) {

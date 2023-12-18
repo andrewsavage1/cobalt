@@ -85,7 +85,7 @@
 #include <assert.h>
 #if defined(__GLIBC__) && !defined(__UCLIBC__)
 // We really are using glibc, not uClibc pretending to be glibc.
-#define LIBC_GLIBC 1
+// #define LIBC_GLIBC 1
 #endif
 #elif defined(_WIN32)
 #define OS_WIN 1

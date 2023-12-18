@@ -82,6 +82,7 @@
 
 #include "zutil.h"
 #include "inftrees.h"
+#include "zlib.h"
 #include "inflate.h"
 #include "contrib/optimizations/inffast_chunk.h"
 #include "contrib/optimizations/chunkcopy.h"

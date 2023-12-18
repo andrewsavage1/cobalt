@@ -12,7 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//build/config/win/visual_studio_version.gni")
+if (is_host_win) {
+  import("//build/config/win/visual_studio_version.gni")
+}
 import("//build/toolchain/gcc_toolchain.gni")
 
 template("cobalt_clang_toolchain") {

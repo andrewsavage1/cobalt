@@ -42,6 +42,7 @@ import("//build/timestamp.gni")
 import("//build_overrides/build.gni")
 import("//testing/libfuzzer/fuzzer_test.gni")
 import("//testing/test.gni")
+import("//build/config/features.gni")
 
 if (is_mac) {
   # Used to generate fuzzer corpus :base_mach_port_rendezvous_convert_corpus.
@@ -3107,6 +3108,7 @@ source_set("arm_bti_testfunctions") {
 }
 
 test("base_unittests") {
+  # sources = ["values_unittest.cc",]
   sources = [
     # "allocator/dispatcher/dispatcher_unittest.cc",
     # "allocator/dispatcher/initializer_unittest.cc",
@@ -3553,7 +3555,7 @@ test("base_unittests") {
     "//base/allocator:buildflags",
     "//base/test:native_library_test_utils",
     "//base/test:run_all_unittests",
-    "//base/test:test_support",
+    # "//base/test:test_support",
     "//base/third_party/dynamic_annotations",
     "//build:blink_buildflags",
     "//build:chromecast_buildflags",
@@ -3573,559 +3575,559 @@ test("base_unittests") {
     # "//testing/buildbot/filters:base_unittests_filters",
   ]
 
-  if (is_android && enable_chrome_android_internal) {
-    data_deps += [ "//clank/build/bot/filters:base_unittests_filters" ]
-  }
+  # if (is_android && enable_chrome_android_internal) {
+  #   data_deps += [ "//clank/build/bot/filters:base_unittests_filters" ]
+  # }
 
-  if (build_rust_base_conversions) {
-    deps += [ "//build/rust:cxx_cppdeps" ]
-  }
+  # if (build_rust_base_conversions) {
+  #   deps += [ "//build/rust:cxx_cppdeps" ]
+  # }
 
-  if (is_apple) {
-    public_deps = [ ":base_unittests_bundle_data" ]
+  # if (is_apple) {
+  #   public_deps = [ ":base_unittests_bundle_data" ]
 
-    deps += [ ":base_unittests_arc" ]
-  }
+  #   deps += [ ":base_unittests_arc" ]
+  # }
 
-  if (!is_ios) {
-    sources += [ "allocator/partition_allocator/tagging_unittest.cc" ]
-  }
+  # if (!is_ios) {
+  #   sources += [ "allocator/partition_allocator/tagging_unittest.cc" ]
+  # }
 
-  data = [
-    "test/data/",
-    "//tools/metrics/histograms/enums.xml",
-  ]
+  # data = [
+  #   "test/data/",
+  #   "//tools/metrics/histograms/enums.xml",
+  # ]
 
-  if (is_win) {
-    deps += [ "//base/win:base_win_buildflags" ]
+  # if (is_win) {
+  #   deps += [ "//base/win:base_win_buildflags" ]
 
-    sources += [
-      "debug/gdi_debug_util_win_unittest.cc",
-      "file_version_info_win_unittest.cc",
-      "process/launch_unittest_win.cc",
-      "test/fake_iasync_operation_win_unittest.cc",
-      "test/test_file_util_win_unittest.cc",
-      "test/test_reg_util_win_unittest.cc",
-      "threading/platform_thread_win_unittest.cc",
-      "time/time_win_unittest.cc",
-      "win/access_control_list_unittest.cc",
-      "win/access_token_unittest.cc",
-      "win/async_operation_unittest.cc",
-      "win/com_init_balancer_unittest.cc",
-      "win/com_init_check_hook_unittest.cc",
-      "win/com_init_util_unittest.cc",
-      "win/dark_mode_support_unittest.cc",
-      "win/dispatch_stub.cc",
-      "win/dispatch_stub.h",
-      "win/dllmain.cc",
-      "win/embedded_i18n/language_selector_unittest.cc",
-      "win/enum_variant_unittest.cc",
-      "win/event_trace_consumer_unittest.cc",
-      "win/event_trace_controller_unittest.cc",
-      "win/event_trace_provider_unittest.cc",
-      "win/hstring_reference_unittest.cc",
-      "win/i18n_unittest.cc",
-      "win/map_unittest.cc",
-      "win/message_window_unittest.cc",
-      "win/object_watcher_unittest.cc",
-      "win/pe_image_reader_unittest.cc",
-      "win/pe_image_unittest.cc",
-      "win/post_async_results_unittest.cc",
-      "win/reference_unittest.cc",
-      "win/registry_unittest.cc",
-      "win/scoped_bstr_unittest.cc",
-      "win/scoped_handle_unittest.cc",
-      "win/scoped_hstring_unittest.cc",
-      "win/scoped_localalloc_unittest.cc",
-      "win/scoped_process_information_unittest.cc",
-      "win/scoped_safearray_unittest.cc",
-      "win/scoped_variant_unittest.cc",
-      "win/scoped_winrt_initializer_unittest.cc",
-      "win/security_descriptor_unittest.cc",
-      "win/security_util_unittest.cc",
-      "win/shortcut_unittest.cc",
-      "win/sid_unittest.cc",
-      "win/startup_information_unittest.cc",
-      "win/variant_conversions_unittest.cc",
-      "win/variant_vector_unittest.cc",
-      "win/vector_unittest.cc",
-      "win/win_includes_unittest.cc",
-      "win/win_util_unittest.cc",
-      "win/windows_version_unittest.cc",
-      "win/winrt_storage_util_unittest.cc",
-      "win/wmi_unittest.cc",
-      "win/wrapped_window_proc_unittest.cc",
-    ]
+  #   sources += [
+  #     "debug/gdi_debug_util_win_unittest.cc",
+  #     "file_version_info_win_unittest.cc",
+  #     "process/launch_unittest_win.cc",
+  #     "test/fake_iasync_operation_win_unittest.cc",
+  #     "test/test_file_util_win_unittest.cc",
+  #     "test/test_reg_util_win_unittest.cc",
+  #     "threading/platform_thread_win_unittest.cc",
+  #     "time/time_win_unittest.cc",
+  #     "win/access_control_list_unittest.cc",
+  #     "win/access_token_unittest.cc",
+  #     "win/async_operation_unittest.cc",
+  #     "win/com_init_balancer_unittest.cc",
+  #     "win/com_init_check_hook_unittest.cc",
+  #     "win/com_init_util_unittest.cc",
+  #     "win/dark_mode_support_unittest.cc",
+  #     "win/dispatch_stub.cc",
+  #     "win/dispatch_stub.h",
+  #     "win/dllmain.cc",
+  #     "win/embedded_i18n/language_selector_unittest.cc",
+  #     "win/enum_variant_unittest.cc",
+  #     "win/event_trace_consumer_unittest.cc",
+  #     "win/event_trace_controller_unittest.cc",
+  #     "win/event_trace_provider_unittest.cc",
+  #     "win/hstring_reference_unittest.cc",
+  #     "win/i18n_unittest.cc",
+  #     "win/map_unittest.cc",
+  #     "win/message_window_unittest.cc",
+  #     "win/object_watcher_unittest.cc",
+  #     "win/pe_image_reader_unittest.cc",
+  #     "win/pe_image_unittest.cc",
+  #     "win/post_async_results_unittest.cc",
+  #     "win/reference_unittest.cc",
+  #     "win/registry_unittest.cc",
+  #     "win/scoped_bstr_unittest.cc",
+  #     "win/scoped_handle_unittest.cc",
+  #     "win/scoped_hstring_unittest.cc",
+  #     "win/scoped_localalloc_unittest.cc",
+  #     "win/scoped_process_information_unittest.cc",
+  #     "win/scoped_safearray_unittest.cc",
+  #     "win/scoped_variant_unittest.cc",
+  #     "win/scoped_winrt_initializer_unittest.cc",
+  #     "win/security_descriptor_unittest.cc",
+  #     "win/security_util_unittest.cc",
+  #     "win/shortcut_unittest.cc",
+  #     "win/sid_unittest.cc",
+  #     "win/startup_information_unittest.cc",
+  #     "win/variant_conversions_unittest.cc",
+  #     "win/variant_vector_unittest.cc",
+  #     "win/vector_unittest.cc",
+  #     "win/win_includes_unittest.cc",
+  #     "win/win_util_unittest.cc",
+  #     "win/windows_version_unittest.cc",
+  #     "win/winrt_storage_util_unittest.cc",
+  #     "win/wmi_unittest.cc",
+  #     "win/wrapped_window_proc_unittest.cc",
+  #   ]
 
-    if (enable_cet_shadow_stack) {
-      sources += [ "win/cet_shadow_stack_unittest.cc" ]
-    }
+  #   if (enable_cet_shadow_stack) {
+  #     sources += [ "win/cet_shadow_stack_unittest.cc" ]
+  #   }
 
-    libs = [
-      "ntdll.lib",
-      "onecore.lib",
-    ]
-  }
+  #   libs = [
+  #     "ntdll.lib",
+  #     "onecore.lib",
+  #   ]
+  # }
 
-  if (!use_cobalt_customizations && (is_linux || is_chromeos)) {
-    sources += [
-      "debug/proc_maps_linux_unittest.cc",
-      "files/scoped_file_linux_unittest.cc",
-    ]
-    if (!!use_cobalt_customizations && !is_nacl) {
-      deps += [ ":stack_canary_linux_unittests" ]
-    }
-  }
+  # if (!use_cobalt_customizations && (is_linux || is_chromeos)) {
+  #   sources += [
+  #     "debug/proc_maps_linux_unittest.cc",
+  #     "files/scoped_file_linux_unittest.cc",
+  #   ]
+  #   if (!!use_cobalt_customizations && !is_nacl) {
+  #     deps += [ ":stack_canary_linux_unittests" ]
+  #   }
+  # }
 
-  if (is_mac) {
-    sources += [
-      "allocator/partition_allocator/shim/allocator_interception_mac_unittest.mm",
-      "allocator/partition_allocator/shim/malloc_zone_functions_mac_unittest.cc",
-      "enterprise_util_mac_unittest.mm",
-      "mac/backup_util_unittest.mm",
-      "mac/bind_objc_block_unittest.mm",
-      "mac/call_with_eh_frame_unittest.mm",
-      "mac/dispatch_source_mach_unittest.cc",
-      "mac/foundation_util_unittest.mm",
-      "mac/mac_util_unittest.mm",
-      "mac/mach_port_rendezvous_unittest.cc",
-      "mac/scoped_mach_vm_unittest.cc",
-      "mac/scoped_nsobject_unittest.mm",
-      "mac/scoped_objc_class_swizzler_unittest.mm",
-      "mac/scoped_sending_event_unittest.mm",
-      "message_loop/message_pump_mac_unittest.mm",
-      "power_monitor/thermal_state_observer_mac_unittest.mm",
-      "process/memory_unittest_mac.h",
-      "process/memory_unittest_mac.mm",
-      "strings/sys_string_conversions_mac_unittest.mm",
-    ]
-  }
+  # if (is_mac) {
+  #   sources += [
+  #     "allocator/partition_allocator/shim/allocator_interception_mac_unittest.mm",
+  #     "allocator/partition_allocator/shim/malloc_zone_functions_mac_unittest.cc",
+  #     "enterprise_util_mac_unittest.mm",
+  #     "mac/backup_util_unittest.mm",
+  #     "mac/bind_objc_block_unittest.mm",
+  #     "mac/call_with_eh_frame_unittest.mm",
+  #     "mac/dispatch_source_mach_unittest.cc",
+  #     "mac/foundation_util_unittest.mm",
+  #     "mac/mac_util_unittest.mm",
+  #     "mac/mach_port_rendezvous_unittest.cc",
+  #     "mac/scoped_mach_vm_unittest.cc",
+  #     "mac/scoped_nsobject_unittest.mm",
+  #     "mac/scoped_objc_class_swizzler_unittest.mm",
+  #     "mac/scoped_sending_event_unittest.mm",
+  #     "message_loop/message_pump_mac_unittest.mm",
+  #     "power_monitor/thermal_state_observer_mac_unittest.mm",
+  #     "process/memory_unittest_mac.h",
+  #     "process/memory_unittest_mac.mm",
+  #     "strings/sys_string_conversions_mac_unittest.mm",
+  #   ]
+  # }
 
-  if (is_apple && enable_mach_absolute_time_ticks) {
-    sources += [ "time/time_mac_unittest.mm" ]
-  }
+  # if (is_apple && enable_mach_absolute_time_ticks) {
+  #   sources += [ "time/time_mac_unittest.mm" ]
+  # }
 
-  if (!use_cobalt_customizations && is_posix) {
-    sources += [
-      "files/dir_reader_posix_unittest.cc",
-      "files/file_descriptor_watcher_posix_unittest.cc",
-      "memory/madv_free_discardable_memory_allocator_posix_unittest.cc",
-      "memory/madv_free_discardable_memory_posix_unittest.cc",
-      "message_loop/fd_watch_controller_posix_unittest.cc",
-      "posix/file_descriptor_shuffle_unittest.cc",
-      "posix/unix_domain_socket_unittest.cc",
-    ]
-    if (!is_nacl && !is_apple) {
-      sources += [
-        "profiler/stack_base_address_posix_unittest.cc",
-        "profiler/stack_copier_signal_unittest.cc",
-        "profiler/thread_delegate_posix_unittest.cc",
-      ]
-    }
-  }
+  # if (!use_cobalt_customizations && is_posix) {
+  #   sources += [
+  #     "files/dir_reader_posix_unittest.cc",
+  #     "files/file_descriptor_watcher_posix_unittest.cc",
+  #     "memory/madv_free_discardable_memory_allocator_posix_unittest.cc",
+  #     "memory/madv_free_discardable_memory_posix_unittest.cc",
+  #     "message_loop/fd_watch_controller_posix_unittest.cc",
+  #     "posix/file_descriptor_shuffle_unittest.cc",
+  #     "posix/unix_domain_socket_unittest.cc",
+  #   ]
+  #   if (!is_nacl && !is_apple) {
+  #     sources += [
+  #       "profiler/stack_base_address_posix_unittest.cc",
+  #       "profiler/stack_copier_signal_unittest.cc",
+  #       "profiler/thread_delegate_posix_unittest.cc",
+  #     ]
+  #   }
+  # }
 
-  # Allow more direct string conversions on platforms with native utf8
-  # strings
-  if (is_apple || is_chromeos || is_castos || is_cast_android || is_fuchsia) {
-    defines += [ "SYSTEM_NATIVE_UTF8" ]
-  }
+  # # Allow more direct string conversions on platforms with native utf8
+  # # strings
+  # if (is_apple || is_chromeos || is_castos || is_cast_android || is_fuchsia) {
+  #   defines += [ "SYSTEM_NATIVE_UTF8" ]
+  # }
 
-  if (is_android) {
-    # Add unwind tables in base_unittests_apk test apk. The unwind tables are
-    # generated from debug info in the binary. Removing "default_symbols" and
-    # adding symbols config removes the "strip_debug" config that strips the
-    # debug info, on base unittests apk.
-    if (can_unwind_with_cfi_table || enable_arm_cfi_table) {
-      configs -= [ "//build/config/compiler:default_symbols" ]
-      if (symbol_level == 2) {
-        configs += [ "//build/config/compiler:symbols" ]
-      } else {
-        configs += [ "//build/config/compiler:minimal_symbols" ]
-      }
-      add_unwind_tables_in_apk = true
-    }
-    if (can_unwind_with_cfi_table) {
-      sources += [ "trace_event/cfi_backtrace_android_unittest.cc" ]
-    }
-    if (current_cpu == "arm") {
-      sources += [
-        "profiler/chrome_unwind_info_android_unittest.cc",
-        "profiler/chrome_unwinder_android_unittest.cc",
-      ]
-    }
-    if (current_cpu == "arm64") {
-      sources += [ "profiler/frame_pointer_unwinder_unittest.cc" ]
-    }
-    if (!exclude_unwind_tables &&
-        (current_cpu == "arm" || current_cpu == "arm64")) {
-      sources += [
-        "profiler/libunwindstack_unwinder_android_unittest.cc",
-        "profiler/native_unwinder_android_unittest.cc",
-      ]
-      deps += [
-        ":base_profiler_reparsing_test_support_library",
-        ":base_profiler_test_support_java",
-        ":base_profiler_test_support_jni_headers",
-        ":base_profiler_test_support_library",
-        ":native_unwinder_android",
-      ]
-    }
+  # if (is_android) {
+  #   # Add unwind tables in base_unittests_apk test apk. The unwind tables are
+  #   # generated from debug info in the binary. Removing "default_symbols" and
+  #   # adding symbols config removes the "strip_debug" config that strips the
+  #   # debug info, on base unittests apk.
+  #   if (can_unwind_with_cfi_table || enable_arm_cfi_table) {
+  #     configs -= [ "//build/config/compiler:default_symbols" ]
+  #     if (symbol_level == 2) {
+  #       configs += [ "//build/config/compiler:symbols" ]
+  #     } else {
+  #       configs += [ "//build/config/compiler:minimal_symbols" ]
+  #     }
+  #     add_unwind_tables_in_apk = true
+  #   }
+  #   if (can_unwind_with_cfi_table) {
+  #     sources += [ "trace_event/cfi_backtrace_android_unittest.cc" ]
+  #   }
+  #   if (current_cpu == "arm") {
+  #     sources += [
+  #       "profiler/chrome_unwind_info_android_unittest.cc",
+  #       "profiler/chrome_unwinder_android_unittest.cc",
+  #     ]
+  #   }
+  #   if (current_cpu == "arm64") {
+  #     sources += [ "profiler/frame_pointer_unwinder_unittest.cc" ]
+  #   }
+  #   if (!exclude_unwind_tables &&
+  #       (current_cpu == "arm" || current_cpu == "arm64")) {
+  #     sources += [
+  #       "profiler/libunwindstack_unwinder_android_unittest.cc",
+  #       "profiler/native_unwinder_android_unittest.cc",
+  #     ]
+  #     deps += [
+  #       ":base_profiler_reparsing_test_support_library",
+  #       ":base_profiler_test_support_java",
+  #       ":base_profiler_test_support_jni_headers",
+  #       ":base_profiler_test_support_library",
+  #       ":native_unwinder_android",
+  #     ]
+  #   }
 
-    sources += [
-      "android/android_image_reader_compat_unittest.cc",
-      "android/application_status_listener_unittest.cc",
-      "android/child_process_unittest.cc",
-      "android/content_uri_utils_unittest.cc",
-      "android/java_handler_thread_unittest.cc",
-      "android/jni_android_unittest.cc",
-      "android/jni_array_unittest.cc",
-      "android/jni_string_unittest.cc",
-      "android/library_loader/library_prefetcher_unittest.cc",
-      "android/linker/linker_jni.cc",
-      "android/linker/linker_jni.h",
-      "android/linker/linker_unittest.cc",
-      "android/meminfo_dump_provider_unittest.cc",
-      "android/path_utils_unittest.cc",
-      "android/radio_utils_unittest.cc",
-      "android/reached_addresses_bitset_unittest.cc",
-      "android/scoped_java_ref_unittest.cc",
-      "android/sys_utils_unittest.cc",
-      "android/unguessable_token_android_unittest.cc",
-      "os_compat_android_unittest.cc",
-    ]
+  #   sources += [
+  #     "android/android_image_reader_compat_unittest.cc",
+  #     "android/application_status_listener_unittest.cc",
+  #     "android/child_process_unittest.cc",
+  #     "android/content_uri_utils_unittest.cc",
+  #     "android/java_handler_thread_unittest.cc",
+  #     "android/jni_android_unittest.cc",
+  #     "android/jni_array_unittest.cc",
+  #     "android/jni_string_unittest.cc",
+  #     "android/library_loader/library_prefetcher_unittest.cc",
+  #     "android/linker/linker_jni.cc",
+  #     "android/linker/linker_jni.h",
+  #     "android/linker/linker_unittest.cc",
+  #     "android/meminfo_dump_provider_unittest.cc",
+  #     "android/path_utils_unittest.cc",
+  #     "android/radio_utils_unittest.cc",
+  #     "android/reached_addresses_bitset_unittest.cc",
+  #     "android/scoped_java_ref_unittest.cc",
+  #     "android/sys_utils_unittest.cc",
+  #     "android/unguessable_token_android_unittest.cc",
+  #     "os_compat_android_unittest.cc",
+  #   ]
 
-    # Android does not use test_launcher to run gtests.
-    sources -= [
-      "process/process_unittest.cc",
-      "process/process_util_unittest.cc",
-      "test/gtest_links_unittest.cc",
-      "test/gtest_tags_unittest.cc",
-      "test/gtest_xml_unittest_result_printer_unittest.cc",
-      "test/launcher/test_launcher_unittest.cc",
-      "test/launcher/test_results_tracker_unittest.cc",
-    ]
-    deps += [
-      ":base_java_unittest_support",
-      "//base/test:test_support_java",
-    ]
-  }
+  #   # Android does not use test_launcher to run gtests.
+  #   sources -= [
+  #     "process/process_unittest.cc",
+  #     "process/process_util_unittest.cc",
+  #     "test/gtest_links_unittest.cc",
+  #     "test/gtest_tags_unittest.cc",
+  #     "test/gtest_xml_unittest_result_printer_unittest.cc",
+  #     "test/launcher/test_launcher_unittest.cc",
+  #     "test/launcher/test_results_tracker_unittest.cc",
+  #   ]
+  #   deps += [
+  #     ":base_java_unittest_support",
+  #     "//base/test:test_support_java",
+  #   ]
+  # }
 
-  if (build_allocation_stack_trace_recorder) {
-    sources += [ "debug/allocation_trace_unittest.cc" ]
-  }
+  # if (build_allocation_stack_trace_recorder) {
+  #   sources += [ "debug/allocation_trace_unittest.cc" ]
+  # }
 
-  if (is_ios) {
-    sources += [
-      "ios/device_util_unittest.mm",
-      "ios/scoped_critical_action_unittest.mm",
-    ]
+  # if (is_ios) {
+  #   sources += [
+  #     "ios/device_util_unittest.mm",
+  #     "ios/scoped_critical_action_unittest.mm",
+  #   ]
 
-    if (is_cronet_build) {
-      sources += [ "message_loop/message_pump_io_ios_unittest.cc" ]
-    } else {
-      sources += [ "message_loop/message_pump_kqueue_unittest.cc" ]
-    }
+  #   if (is_cronet_build) {
+  #     sources += [ "message_loop/message_pump_io_ios_unittest.cc" ]
+  #   } else {
+  #     sources += [ "message_loop/message_pump_kqueue_unittest.cc" ]
+  #   }
 
-    # ios does not use test_launcher to run gtests.
-    sources -= [
-      "files/file_path_watcher_unittest.cc",
-      "memory/discardable_shared_memory_unittest.cc",
-      "process/memory_unittest.cc",
-      "process/process_unittest.cc",
-      "process/process_util_unittest.cc",
-      "sync_socket_unittest.cc",
-      "synchronization/waitable_event_watcher_unittest.cc",
-      "test/gtest_links_unittest.cc",
-      "test/gtest_tags_unittest.cc",
-      "test/gtest_xml_unittest_result_printer_unittest.cc",
-      "test/launcher/test_launcher_unittest.cc",
-      "test/launcher/test_results_tracker_unittest.cc",
-    ]
+  #   # ios does not use test_launcher to run gtests.
+  #   sources -= [
+  #     "files/file_path_watcher_unittest.cc",
+  #     "memory/discardable_shared_memory_unittest.cc",
+  #     "process/memory_unittest.cc",
+  #     "process/process_unittest.cc",
+  #     "process/process_util_unittest.cc",
+  #     "sync_socket_unittest.cc",
+  #     "synchronization/waitable_event_watcher_unittest.cc",
+  #     "test/gtest_links_unittest.cc",
+  #     "test/gtest_tags_unittest.cc",
+  #     "test/gtest_xml_unittest_result_printer_unittest.cc",
+  #     "test/launcher/test_launcher_unittest.cc",
+  #     "test/launcher/test_results_tracker_unittest.cc",
+  #   ]
 
-    sources += [
-      # Pull in specific Mac files for iOS.
-      "mac/backup_util_unittest.mm",
-      "mac/bind_objc_block_unittest.mm",
-      "mac/foundation_util_unittest.mm",
-      "mac/scoped_nsobject_unittest.mm",
-      "strings/sys_string_conversions_mac_unittest.mm",
-    ]
+  #   sources += [
+  #     # Pull in specific Mac files for iOS.
+  #     "mac/backup_util_unittest.mm",
+  #     "mac/bind_objc_block_unittest.mm",
+  #     "mac/foundation_util_unittest.mm",
+  #     "mac/scoped_nsobject_unittest.mm",
+  #     "strings/sys_string_conversions_mac_unittest.mm",
+  #   ]
 
-    sources -= [
-      # The immediate crash tests require shared libraries, which we don't
-      # support loading on iOS.
-      "immediate_crash_unittest.cc",
-    ]
+  #   sources -= [
+  #     # The immediate crash tests require shared libraries, which we don't
+  #     # support loading on iOS.
+  #     "immediate_crash_unittest.cc",
+  #   ]
 
-    if (use_allocator_shim) {
-      sources += [
-        "allocator/partition_allocator/shim/allocator_interception_mac_unittest.mm",
-        "allocator/partition_allocator/shim/malloc_zone_functions_mac_unittest.cc",
-      ]
-    }
+  #   if (use_allocator_shim) {
+  #     sources += [
+  #       "allocator/partition_allocator/shim/allocator_interception_mac_unittest.mm",
+  #       "allocator/partition_allocator/shim/malloc_zone_functions_mac_unittest.cc",
+  #     ]
+  #   }
 
-    if (use_blink) {
-      sources += [ "files/file_path_watcher_unittest.cc" ]
-    }
-  }
+  #   if (use_blink) {
+  #     sources += [ "files/file_path_watcher_unittest.cc" ]
+  #   }
+  # }
 
-  if (use_partition_alloc) {
-    sources += [
-      "allocator/partition_allocator/address_pool_manager_unittest.cc",
-      "allocator/partition_allocator/address_space_randomization_unittest.cc",
-      "allocator/partition_allocator/compressed_pointer_unittest.cc",
-      "allocator/partition_allocator/freeslot_bitmap_unittest.cc",
-      "allocator/partition_allocator/hardening_unittest.cc",
-      "allocator/partition_allocator/memory_reclaimer_unittest.cc",
-      "allocator/partition_allocator/page_allocator_unittest.cc",
-      "allocator/partition_allocator/partition_alloc_base/bits_pa_unittest.cc",
-      "allocator/partition_allocator/partition_alloc_base/component_export_pa_unittest.cc",
-      "allocator/partition_allocator/partition_alloc_base/cpu_pa_unittest.cc",
-      "allocator/partition_allocator/partition_alloc_base/cxx17_backports_pa_unittest.cc",
-      "allocator/partition_allocator/partition_alloc_base/logging_pa_unittest.cc",
-      "allocator/partition_allocator/partition_alloc_base/rand_util_pa_unittest.cc",
-      "allocator/partition_allocator/partition_alloc_base/scoped_clear_last_error_pa_unittest.cc",
-      "allocator/partition_allocator/partition_alloc_base/strings/stringprintf_pa_unittest.cc",
-      "allocator/partition_allocator/partition_alloc_base/thread_annotations_pa_unittest.cc",
-      "allocator/partition_allocator/partition_alloc_unittest.cc",
-      "allocator/partition_allocator/partition_lock_unittest.cc",
-      "allocator/partition_allocator/reverse_bytes_unittest.cc",
-      "allocator/partition_allocator/thread_cache_unittest.cc",
-    ]
+  # if (use_partition_alloc) {
+  #   sources += [
+  #     "allocator/partition_allocator/address_pool_manager_unittest.cc",
+  #     "allocator/partition_allocator/address_space_randomization_unittest.cc",
+  #     "allocator/partition_allocator/compressed_pointer_unittest.cc",
+  #     "allocator/partition_allocator/freeslot_bitmap_unittest.cc",
+  #     "allocator/partition_allocator/hardening_unittest.cc",
+  #     "allocator/partition_allocator/memory_reclaimer_unittest.cc",
+  #     "allocator/partition_allocator/page_allocator_unittest.cc",
+  #     "allocator/partition_allocator/partition_alloc_base/bits_pa_unittest.cc",
+  #     "allocator/partition_allocator/partition_alloc_base/component_export_pa_unittest.cc",
+  #     "allocator/partition_allocator/partition_alloc_base/cpu_pa_unittest.cc",
+  #     "allocator/partition_allocator/partition_alloc_base/cxx17_backports_pa_unittest.cc",
+  #     "allocator/partition_allocator/partition_alloc_base/logging_pa_unittest.cc",
+  #     "allocator/partition_allocator/partition_alloc_base/rand_util_pa_unittest.cc",
+  #     "allocator/partition_allocator/partition_alloc_base/scoped_clear_last_error_pa_unittest.cc",
+  #     "allocator/partition_allocator/partition_alloc_base/strings/stringprintf_pa_unittest.cc",
+  #     "allocator/partition_allocator/partition_alloc_base/thread_annotations_pa_unittest.cc",
+  #     "allocator/partition_allocator/partition_alloc_unittest.cc",
+  #     "allocator/partition_allocator/partition_lock_unittest.cc",
+  #     "allocator/partition_allocator/reverse_bytes_unittest.cc",
+  #     "allocator/partition_allocator/thread_cache_unittest.cc",
+  #   ]
 
-    if (use_starscan) {
-      sources += [
-        "allocator/partition_allocator/starscan/pcscan_scheduling_unittest.cc",
-        "allocator/partition_allocator/starscan/pcscan_unittest.cc",
-        "allocator/partition_allocator/starscan/scan_loop_unittest.cc",
-        "allocator/partition_allocator/starscan/stack/stack_unittest.cc",
-        "allocator/partition_allocator/starscan/state_bitmap_unittest.cc",
-      ]
-    }
+  #   if (use_starscan) {
+  #     sources += [
+  #       "allocator/partition_allocator/starscan/pcscan_scheduling_unittest.cc",
+  #       "allocator/partition_allocator/starscan/pcscan_unittest.cc",
+  #       "allocator/partition_allocator/starscan/scan_loop_unittest.cc",
+  #       "allocator/partition_allocator/starscan/stack/stack_unittest.cc",
+  #       "allocator/partition_allocator/starscan/state_bitmap_unittest.cc",
+  #     ]
+  #   }
 
-    if ((is_android || is_linux) && target_cpu == "arm64") {
-      cflags = [
-        "-Xclang",
-        "-target-feature",
-        "-Xclang",
-        "+mte",
-      ]
-    }
+  #   if ((is_android || is_linux) && target_cpu == "arm64") {
+  #     cflags = [
+  #       "-Xclang",
+  #       "-target-feature",
+  #       "-Xclang",
+  #       "+mte",
+  #     ]
+  #   }
 
-    if (is_android) {
-      sources += [
-        "allocator/partition_allocator/partition_alloc_base/files/file_path_pa_unittest.cc",
-        "allocator/partition_allocator/partition_alloc_base/native_library_pa_unittest.cc",
-      ]
-    } else if (is_fuchsia) {
-      sources += [ "allocator/partition_allocator/partition_alloc_base/fuchsia/fuchsia_logging_pa_unittest.cc" ]
-    }
+  #   if (is_android) {
+  #     sources += [
+  #       "allocator/partition_allocator/partition_alloc_base/files/file_path_pa_unittest.cc",
+  #       "allocator/partition_allocator/partition_alloc_base/native_library_pa_unittest.cc",
+  #     ]
+  #   } else if (is_fuchsia) {
+  #     sources += [ "allocator/partition_allocator/partition_alloc_base/fuchsia/fuchsia_logging_pa_unittest.cc" ]
+  #   }
 
-    if (enable_pkeys && is_debug && !is_component_build) {
-      # This test requires RELRO, which is not enabled in component builds.
-      # Also, require a debug build, since we only disable stack protectors in
-      # debug builds in partition alloc (see below why it's needed).
-      sources += [ "allocator/partition_allocator/pkey_unittest.cc" ]
+  #   if (enable_pkeys && is_debug && !is_component_build) {
+  #     # This test requires RELRO, which is not enabled in component builds.
+  #     # Also, require a debug build, since we only disable stack protectors in
+  #     # debug builds in partition alloc (see below why it's needed).
+  #     sources += [ "allocator/partition_allocator/pkey_unittest.cc" ]
 
-      # We want to test the pkey code without access to memory that is not
-      # pkey-tagged. This will allow us to catch unintended memory accesses
-      # that could break our security assumptions. The stack protector reads a
-      # value from the TLS which won't be pkey-tagged, hence disabling it for
-      # the test.
-      configs += [ ":no_stack_protector" ]
-    }
+  #     # We want to test the pkey code without access to memory that is not
+  #     # pkey-tagged. This will allow us to catch unintended memory accesses
+  #     # that could break our security assumptions. The stack protector reads a
+  #     # value from the TLS which won't be pkey-tagged, hence disabling it for
+  #     # the test.
+  #     configs += [ ":no_stack_protector" ]
+  #   }
 
-    deps += [ ":partition_alloc_test_support" ]
-  }
+  #   deps += [ ":partition_alloc_test_support" ]
+  # }
 
-  if (is_mac) {
-    sources += [ "message_loop/message_pump_kqueue_unittest.cc" ]
-    frameworks = [
-      "CoreFoundation.framework",
-      "Foundation.framework",
-      "OpenCL.framework",
-    ]
-    if (current_cpu == "x64") {
-      deps += [ ":base_profiler_test_support_library" ]
-    }
-  }
+  # if (is_mac) {
+  #   sources += [ "message_loop/message_pump_kqueue_unittest.cc" ]
+  #   frameworks = [
+  #     "CoreFoundation.framework",
+  #     "Foundation.framework",
+  #     "OpenCL.framework",
+  #   ]
+  #   if (current_cpu == "x64") {
+  #     deps += [ ":base_profiler_test_support_library" ]
+  #   }
+  # }
 
-  if (!use_cobalt_customizations && (is_fuchsia || is_linux || is_chromeos)) {
-    sources += [
-      "debug/elf_reader_unittest.cc",
-      "debug/test_elf_image_builder.cc",
-      "debug/test_elf_image_builder.h",
-    ]
+  # if (!use_cobalt_customizations && (is_fuchsia || is_linux || is_chromeos)) {
+  #   sources += [
+  #     "debug/elf_reader_unittest.cc",
+  #     "debug/test_elf_image_builder.cc",
+  #     "debug/test_elf_image_builder.h",
+  #   ]
 
-    deps += [ "//base/test:malloc_wrapper" ]
-    defines += [
-      # This library is used by ElfReaderTest to test reading elf files.
-      "MALLOC_WRAPPER_LIB=\"${shlib_prefix}malloc_wrapper${shlib_extension}\"",
-    ]
+  #   deps += [ "//base/test:malloc_wrapper" ]
+  #   defines += [
+  #     # This library is used by ElfReaderTest to test reading elf files.
+  #     "MALLOC_WRAPPER_LIB=\"${shlib_prefix}malloc_wrapper${shlib_extension}\"",
+  #   ]
 
-    if (!is_component_build) {
-      # Set rpath to find libmalloc_wrapper.so even in a non-component build.
-      configs += [ "//build/config/gcc:rpath_for_built_shared_libraries" ]
-    }
-  }
+  #   if (!is_component_build) {
+  #     # Set rpath to find libmalloc_wrapper.so even in a non-component build.
+  #     configs += [ "//build/config/gcc:rpath_for_built_shared_libraries" ]
+  #   }
+  # }
 
-  if (is_chromeos_lacros) {
-    sources += [ "i18n/icu_mergeable_data_file_unittest.cc" ]
-  }
+  # if (is_chromeos_lacros) {
+  #   sources += [ "i18n/icu_mergeable_data_file_unittest.cc" ]
+  # }
 
-  if (!use_cobalt_customizations && (is_linux || is_chromeos_lacros)) {
-    sources += [
-      "linux_util_unittest.cc",
-      "nix/xdg_util_unittest.cc",
-    ]
-  }
+  # if (!use_cobalt_customizations && (is_linux || is_chromeos_lacros)) {
+  #   sources += [
+  #     "linux_util_unittest.cc",
+  #     "nix/xdg_util_unittest.cc",
+  #   ]
+  # }
 
-  if (!use_glib) {
+  if (!use_glib || true) {
     sources -= [ "message_loop/message_pump_glib_unittest.cc" ]
   }
 
-  if (use_libevent) {
-    sources += [ "message_loop/message_pump_libevent_unittest.cc" ]
-    deps += [
-      ":message_pump_buildflags",
-      "//third_party/libevent",
-    ]
-  }
+  # if (use_libevent) {
+  #   sources += [ "message_loop/message_pump_libevent_unittest.cc" ]
+  #   deps += [
+  #     ":message_pump_buildflags",
+  #     "//third_party/libevent",
+  #   ]
+  # }
 
-  if (is_fuchsia) {
-    sources += [
-      "files/dir_reader_posix_unittest.cc",
-      "files/file_descriptor_watcher_posix_unittest.cc",
-      "fuchsia/fidl_event_handler_unittest.cc",
-      "fuchsia/file_utils_unittest.cc",
-      "fuchsia/filtered_service_directory_unittest.cc",
-      "fuchsia/fuchsia_logging_unittest.cc",
-      "fuchsia/intl_profile_watcher_unittest.cc",
-      "fuchsia/mem_buffer_util_unittest.cc",
-      "fuchsia/scoped_natural_service_binding_unittest.cc",
-      "fuchsia/scoped_natural_service_publisher_unittest.cc",
-      "fuchsia/scoped_service_binding_unittest.cc",
-      "fuchsia/scoped_service_publisher_unittest.cc",
-      "fuchsia/system_build_info_unittest.cc",
-      "fuchsia/system_product_info_unittest.cc",
-      "fuchsia/test_component_context_for_process_unittest.cc",
-      "fuchsia/time_zone_data_unittest.cc",
-      "message_loop/fd_watch_controller_posix_unittest.cc",
-      "posix/file_descriptor_shuffle_unittest.cc",
-    ]
+  # if (is_fuchsia) {
+  #   sources += [
+  #     "files/dir_reader_posix_unittest.cc",
+  #     "files/file_descriptor_watcher_posix_unittest.cc",
+  #     "fuchsia/fidl_event_handler_unittest.cc",
+  #     "fuchsia/file_utils_unittest.cc",
+  #     "fuchsia/filtered_service_directory_unittest.cc",
+  #     "fuchsia/fuchsia_logging_unittest.cc",
+  #     "fuchsia/intl_profile_watcher_unittest.cc",
+  #     "fuchsia/mem_buffer_util_unittest.cc",
+  #     "fuchsia/scoped_natural_service_binding_unittest.cc",
+  #     "fuchsia/scoped_natural_service_publisher_unittest.cc",
+  #     "fuchsia/scoped_service_binding_unittest.cc",
+  #     "fuchsia/scoped_service_publisher_unittest.cc",
+  #     "fuchsia/system_build_info_unittest.cc",
+  #     "fuchsia/system_product_info_unittest.cc",
+  #     "fuchsia/test_component_context_for_process_unittest.cc",
+  #     "fuchsia/time_zone_data_unittest.cc",
+  #     "message_loop/fd_watch_controller_posix_unittest.cc",
+  #     "posix/file_descriptor_shuffle_unittest.cc",
+  #   ]
 
-    # FilePatchWatcherImpl is not implemented. See crbug.com/851641.
-    # TODO(crbug.com/1430566): Convert this subtraction to a condition where
-    # it is added.
-    sources -= [ "files/file_path_watcher_unittest.cc" ]
+  #   # FilePatchWatcherImpl is not implemented. See crbug.com/851641.
+  #   # TODO(crbug.com/1430566): Convert this subtraction to a condition where
+  #   # it is added.
+  #   sources -= [ "files/file_path_watcher_unittest.cc" ]
 
-    deps += [
-      ":test_interface_impl",
-      ":test_interface_natural_impl",
-      ":test_log_listener_safe",
-      "//third_party/fuchsia-sdk/sdk/fidl/fuchsia.buildinfo:fuchsia.buildinfo_cpp",
-      "//third_party/fuchsia-sdk/sdk/fidl/fuchsia.buildinfo:fuchsia.buildinfo_hlcpp",
-      "//third_party/fuchsia-sdk/sdk/fidl/fuchsia.hwinfo:fuchsia.hwinfo_cpp",
-      "//third_party/fuchsia-sdk/sdk/fidl/fuchsia.intl:fuchsia.intl_hlcpp",
-      "//third_party/fuchsia-sdk/sdk/fidl/fuchsia.logger:fuchsia.logger_cpp",
-      "//third_party/fuchsia-sdk/sdk/fidl/fuchsia.mem:fuchsia.mem_hlcpp",
-      "//third_party/fuchsia-sdk/sdk/pkg/async",
-      "//third_party/fuchsia-sdk/sdk/pkg/async-default",
-      "//third_party/fuchsia-sdk/sdk/pkg/component_incoming_cpp",
-      "//third_party/fuchsia-sdk/sdk/pkg/fdio",
-      "//third_party/fuchsia-sdk/sdk/pkg/sys_cpp",
-    ]
+  #   deps += [
+  #     ":test_interface_impl",
+  #     ":test_interface_natural_impl",
+  #     ":test_log_listener_safe",
+  #     "//third_party/fuchsia-sdk/sdk/fidl/fuchsia.buildinfo:fuchsia.buildinfo_cpp",
+  #     "//third_party/fuchsia-sdk/sdk/fidl/fuchsia.buildinfo:fuchsia.buildinfo_hlcpp",
+  #     "//third_party/fuchsia-sdk/sdk/fidl/fuchsia.hwinfo:fuchsia.hwinfo_cpp",
+  #     "//third_party/fuchsia-sdk/sdk/fidl/fuchsia.intl:fuchsia.intl_hlcpp",
+  #     "//third_party/fuchsia-sdk/sdk/fidl/fuchsia.logger:fuchsia.logger_cpp",
+  #     "//third_party/fuchsia-sdk/sdk/fidl/fuchsia.mem:fuchsia.mem_hlcpp",
+  #     "//third_party/fuchsia-sdk/sdk/pkg/async",
+  #     "//third_party/fuchsia-sdk/sdk/pkg/async-default",
+  #     "//third_party/fuchsia-sdk/sdk/pkg/component_incoming_cpp",
+  #     "//third_party/fuchsia-sdk/sdk/pkg/fdio",
+  #     "//third_party/fuchsia-sdk/sdk/pkg/sys_cpp",
+  #   ]
 
-    additional_manifest_fragments =
-        [ "//build/config/fuchsia/test/logger.shard.test-cml" ]
-  }
+  #   additional_manifest_fragments =
+  #       [ "//build/config/fuchsia/test/logger.shard.test-cml" ]
+  # }
 
-  if (!use_cobalt_customizations && !is_fuchsia && !is_ios) {
-    sources += [ "files/file_locking_unittest.cc" ]
-  }
+  # if (!use_cobalt_customizations && !is_fuchsia && !is_ios) {
+  #   sources += [ "files/file_locking_unittest.cc" ]
+  # }
 
-  if (is_android) {
-    deps += [ "//testing/android/native_test:native_test_native_code" ]
-    sources += [
-      "debug/elf_reader_unittest.cc",
-      "debug/proc_maps_linux_unittest.cc",
-      "debug/test_elf_image_builder.cc",
-      "debug/test_elf_image_builder.h",
-    ]
-  }
+  # if (is_android) {
+  #   deps += [ "//testing/android/native_test:native_test_native_code" ]
+  #   sources += [
+  #     "debug/elf_reader_unittest.cc",
+  #     "debug/proc_maps_linux_unittest.cc",
+  #     "debug/test_elf_image_builder.cc",
+  #     "debug/test_elf_image_builder.h",
+  #   ]
+  # }
 
-  if (is_win) {
-    deps += [ "//base:scoped_handle_test_dll" ]
-    if (current_cpu == "x64" || current_cpu == "arm64") {
-      sources += [ "profiler/win32_stack_frame_unwinder_unittest.cc" ]
-      deps += [ ":base_profiler_test_support_library" ]
-    }
-    sources += [ "files/os_validation_win_unittest.cc" ]
+  # if (is_win) {
+  #   deps += [ "//base:scoped_handle_test_dll" ]
+  #   if (current_cpu == "x64" || current_cpu == "arm64") {
+  #     sources += [ "profiler/win32_stack_frame_unwinder_unittest.cc" ]
+  #     deps += [ ":base_profiler_test_support_library" ]
+  #   }
+  #   sources += [ "files/os_validation_win_unittest.cc" ]
 
-    if (toolchain_has_rust && win_enable_cfg_guards) {
-      deps += [ ":rust_cfg_win_test" ]
-    }
-  }
-  if (is_apple) {
-    sources += [ "profiler/frame_pointer_unwinder_unittest.cc" ]
-  }
-  if (is_chromeos && current_cpu == "x64") {
-    sources += [ "profiler/frame_pointer_unwinder_unittest.cc" ]
-    deps += [ ":base_profiler_test_support_library" ]
-  }
+  #   if (toolchain_has_rust && win_enable_cfg_guards) {
+  #     deps += [ ":rust_cfg_win_test" ]
+  #   }
+  # }
+  # if (is_apple) {
+  #   sources += [ "profiler/frame_pointer_unwinder_unittest.cc" ]
+  # }
+  # if (is_chromeos && current_cpu == "x64") {
+  #   sources += [ "profiler/frame_pointer_unwinder_unittest.cc" ]
+  #   deps += [ ":base_profiler_test_support_library" ]
+  # }
 
-  if (use_allocator_shim) {
-    sources += [
-      "allocator/partition_allocator/shim/allocator_shim_unittest.cc",
-      "sampling_heap_profiler/poisson_allocation_sampler_unittest.cc",
-      "sampling_heap_profiler/sampling_heap_profiler_unittest.cc",
-    ]
+  # if (use_allocator_shim) {
+  #   sources += [
+  #     "allocator/partition_allocator/shim/allocator_shim_unittest.cc",
+  #     "sampling_heap_profiler/poisson_allocation_sampler_unittest.cc",
+  #     "sampling_heap_profiler/sampling_heap_profiler_unittest.cc",
+  #   ]
 
-    if (is_win) {
-      sources +=
-          [ "allocator/partition_allocator/shim/winheap_stubs_win_unittest.cc" ]
-    }
+  #   if (is_win) {
+  #     sources +=
+  #         [ "allocator/partition_allocator/shim/winheap_stubs_win_unittest.cc" ]
+  #   }
 
-    sources += [
-      "allocator/partition_alloc_support_unittest.cc",
-      "allocator/partition_allocator/shim/allocator_shim_default_dispatch_to_partition_alloc_unittest.cc",
-    ]
-  }
+  #   sources += [
+  #     "allocator/partition_alloc_support_unittest.cc",
+  #     "allocator/partition_allocator/shim/allocator_shim_default_dispatch_to_partition_alloc_unittest.cc",
+  #   ]
+  # }
 
-  if (enable_base_tracing) {
-    sources += [
-      "test/trace_event_analyzer_unittest.cc",
-      "trace_event/memory_allocator_dump_unittest.cc",
-      "trace_event/memory_dump_manager_unittest.cc",
-      "trace_event/memory_dump_scheduler_unittest.cc",
-      "trace_event/memory_infra_background_allowlist_unittest.cc",
-      "trace_event/memory_usage_estimator_unittest.cc",
-      "trace_event/process_memory_dump_unittest.cc",
-      "trace_event/trace_arguments_unittest.cc",
-      "trace_event/trace_category_unittest.cc",
-      "trace_event/trace_config_unittest.cc",
-      "trace_event/trace_conversion_helper_unittest.cc",
-      "trace_event/trace_event_unittest.cc",
-      "trace_event/traced_value_support_unittest.cc",
-      "trace_event/traced_value_unittest.cc",
-      "trace_event/typed_macros_unittest.cc",
-      "tracing/perfetto_task_runner_unittest.cc",
-    ]
+  # if (enable_base_tracing) {
+  #   sources += [
+  #     "test/trace_event_analyzer_unittest.cc",
+  #     "trace_event/memory_allocator_dump_unittest.cc",
+  #     "trace_event/memory_dump_manager_unittest.cc",
+  #     "trace_event/memory_dump_scheduler_unittest.cc",
+  #     "trace_event/memory_infra_background_allowlist_unittest.cc",
+  #     "trace_event/memory_usage_estimator_unittest.cc",
+  #     "trace_event/process_memory_dump_unittest.cc",
+  #     "trace_event/trace_arguments_unittest.cc",
+  #     "trace_event/trace_category_unittest.cc",
+  #     "trace_event/trace_config_unittest.cc",
+  #     "trace_event/trace_conversion_helper_unittest.cc",
+  #     "trace_event/trace_event_unittest.cc",
+  #     "trace_event/traced_value_support_unittest.cc",
+  #     "trace_event/traced_value_unittest.cc",
+  #     "trace_event/typed_macros_unittest.cc",
+  #     "tracing/perfetto_task_runner_unittest.cc",
+  #   ]
 
-    if (is_android) {
-      sources += [
-        "trace_event/cpufreq_monitor_android_unittest.cc",
-        "trace_event/java_heap_dump_provider_android_unittest.cc",
-      ]
-    }
+  #   if (is_android) {
+  #     sources += [
+  #       "trace_event/cpufreq_monitor_android_unittest.cc",
+  #       "trace_event/java_heap_dump_provider_android_unittest.cc",
+  #     ]
+  #   }
 
-    deps += [
-      "//third_party/perfetto/include/perfetto/trace_processor:storage",
-      "//third_party/perfetto/protos/perfetto/trace:lite",
-      "//third_party/perfetto/protos/perfetto/trace/interned_data:lite",
-      "//third_party/perfetto/protos/perfetto/trace/track_event:lite",
-    ]
-  }
+  #   deps += [
+  #     "//third_party/perfetto/include/perfetto/trace_processor:storage",
+  #     "//third_party/perfetto/protos/perfetto/trace:lite",
+  #     "//third_party/perfetto/protos/perfetto/trace/interned_data:lite",
+  #     "//third_party/perfetto/protos/perfetto/trace/track_event:lite",
+  #   ]
+  # }
 }
 
 # Test that CFG is enabled in Rust code.
