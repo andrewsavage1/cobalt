@@ -17,6 +17,10 @@ static_library("http_server") {
     "//chrome/test/chromedriver/*",
     "//content/browser",
     "//net:net_web_socket_encoder_fuzzer_deps",
+    "//cobalt/network:*",
+    "//cobalt/webdriver",
+    "//cobalt/debug",
+    "//cobalt/h5vcc",
   ]
 
   friend = [
