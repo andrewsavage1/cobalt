@@ -223,7 +223,7 @@ class Tokens {
   // the initialization list which causes a compile error.
   char dummy_;
 
-  DISALLOW_COPY_AND_ASSIGN(Tokens);
+  // DISALLOW_COPY_AND_ASSIGN(Tokens);
 };
 
 #undef EVENT_NAMES_FOR_EACH

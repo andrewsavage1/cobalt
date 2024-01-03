@@ -55,7 +55,7 @@ class TokenStorage {
 #if defined(BASE_HASH_USE_HASH_STRUCT)
 
 uint32 hash(const char* str) {
-  return BASE_HASH_NAMESPACE::hash<std::string>()(std::string(str));
+  return std::hash<std::string>()(std::string(str));
 }
 
 #else

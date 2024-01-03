@@ -95,7 +95,7 @@ class ZipParams {
   base::FilePath src_dir_;
 
   base::FilePath dest_file_;
-#if defined(OS_POSIX)
+#if defined(OS_POSIX) && !defined(STARBOARD)
   int dest_fd_ = base::kInvalidPlatformFile;
 #endif
 

@@ -82,7 +82,7 @@ class ZipWriter {
   // Abstraction over file access methods used to read files.
   FileAccessor* file_accessor_;
 
-  DISALLOW_COPY_AND_ASSIGN(ZipWriter);
+  // DISALLOW_COPY_AND_ASSIGN(ZipWriter);
 };
 
 }  // namespace internal

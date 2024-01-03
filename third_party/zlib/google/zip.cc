@@ -154,7 +154,7 @@ bool Zip(const ZipParams& params) {
   }
 
   std::unique_ptr<internal::ZipWriter> zip_writer;
-#if defined(OS_POSIX)
+#if defined(OS_POSIX) && !defined(STARBOARD)
   if (params.dest_fd() != base::kInvalidPlatformFile) {
     DCHECK(params.dest_file().empty());
     zip_writer = internal::ZipWriter::CreateWithFd(

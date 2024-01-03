@@ -23,6 +23,8 @@
 #include "base/logging.h"
 #include "starboard/common/string.h"
 
+#define BASE_HASH_USE_HASH_STRUCT
+
 namespace base {
 
 // Token is a class used to represent a string constant.  It will never be
@@ -120,24 +122,26 @@ inline std::ostream& operator<<(std::ostream& os, base::Token token) {
 
 }  // namespace base
 
-namespace BASE_HASH_NAMESPACE {
 #if defined(BASE_HASH_USE_HASH_STRUCT)
 
+namespace std {
 template <>
 struct hash<base::Token> {
   std::size_t operator()(const base::Token& token) const {
     return reinterpret_cast<size_t>(token.c_str());
   }
 };
+}  // namespace std
 
 #else
-
+namespace BASE_HASH_NAMESPACE {
 template <>
 inline size_t hash_value<base::Token>(const base::Token& token) {
   return reinterpret_cast<size_t>(token.c_str());
 }
+}  // namespace BASE_HASH_NAMESPACE
 
 #endif  // BASE_HASH_USE_STRUCT
-}  // namespace BASE_HASH_NAMESPACE
+
 
 #endif  // COBALT_BASE_TOKEN_H_
