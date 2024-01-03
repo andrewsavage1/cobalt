@@ -16,7 +16,7 @@ config("compiler_flags") {
   cflags = []
   cflags_c = []
   cflags_cc = []
-  defines = []
+  defines = ["WARN_UNUSED_RESULT="]
   ldflags = [ "-Wl,--error-limit=0" ]
 
   if (is_debug) {
