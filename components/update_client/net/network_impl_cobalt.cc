@@ -19,7 +19,7 @@
 
 #include "base/bind.h"
 #include "base/callback.h"
-#include "base/callback_helpers.h"
+#include "base/functional/callback_helpers.h"
 #include "base/threading/thread_task_runner_handle.h"
 #include "cobalt/base/polymorphic_downcast.h"
 #include "cobalt/loader/url_fetcher_string_writer.h"

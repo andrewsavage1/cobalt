@@ -20,7 +20,7 @@
 #include <utility>
 
 #include "base/bind.h"
-#include "base/callback_helpers.h"
+#include "base/functional/callback_helpers.h"
 #include "base/strings/string_number_conversions.h"
 #include "cobalt/base/polymorphic_downcast.h"
 #include "cobalt/loader/cors_preflight.h"
