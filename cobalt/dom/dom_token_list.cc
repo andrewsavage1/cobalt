@@ -54,7 +54,7 @@ base::Optional<std::string> DOMTokenList::Item(unsigned int index) const {
   // 1. If index is equal to or greater than the number of tokens in tokens,
   //    return null.
   if (index >= tokens_.size()) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   // 2. Return the indexth token in tokens.

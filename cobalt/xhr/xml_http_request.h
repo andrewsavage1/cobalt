@@ -108,18 +108,17 @@ class XMLHttpRequest : public XMLHttpRequestEventTarget,
   void Abort();
   void Open(const std::string& method, const std::string& url,
             script::ExceptionState* exception_state) {
-    return Open(method, url, true, base::nullopt, base::nullopt,
-                exception_state);
+    return Open(method, url, true, std::nullopt, std::nullopt, exception_state);
   }
   void Open(const std::string& method, const std::string& url, bool async,
             script::ExceptionState* exception_state) {
-    return Open(method, url, async, base::nullopt, base::nullopt,
+    return Open(method, url, async, std::nullopt, std::nullopt,
                 exception_state);
   }
   void Open(const std::string& method, const std::string& url, bool async,
             const base::Optional<std::string>& username,
             script::ExceptionState* exception_state) {
-    return Open(method, url, async, username, base::nullopt, exception_state);
+    return Open(method, url, async, username, std::nullopt, exception_state);
   }
   void Open(const std::string& method, const std::string& url, bool async,
             const base::Optional<std::string>& username,
@@ -136,7 +135,7 @@ class XMLHttpRequest : public XMLHttpRequestEventTarget,
                         script::ExceptionState* exception_state);
 
   void Send(script::ExceptionState* exception_state) {
-    Send(base::nullopt, exception_state);
+    Send(std::nullopt, exception_state);
   }
   void Send(const base::Optional<RequestBodyType>& request_body,
             script::ExceptionState* exception_state);

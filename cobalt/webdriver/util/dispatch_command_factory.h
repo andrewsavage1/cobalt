@@ -108,7 +108,7 @@ std::unique_ptr<base::Value> ToValue(
 }
 
 // Convert a base::Value to a base::Optional<T>. If value could not be converted
-// base::nullopt will be returned.
+// std::nullopt will be returned.
 template <typename T>
 base::Optional<T> FromValue(const base::Value* value) {
   return T::FromValue(value);
@@ -121,7 +121,7 @@ base::Optional<GURL> FromValue(const base::Value* value) {
   const base::DictionaryValue* dictionary_value;
   if (!value->GetAsDictionary(&dictionary_value) ||
       !dictionary_value->GetString(kUrlKey, &url)) {
-    return base::nullopt;
+    return std::nullopt;
   }
   return GURL(url.c_str());
 }

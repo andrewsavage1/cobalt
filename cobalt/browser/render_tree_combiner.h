@@ -42,8 +42,8 @@ class RenderTreeCombiner {
     ~Layer();
 
     void Reset() {
-      render_tree_ = base::nullopt;
-      receipt_time_ = base::nullopt;
+      render_tree_ = std::nullopt;
+      receipt_time_ = std::nullopt;
     }
 
     // Submit render tree to the layer, and specify whether the time
@@ -55,7 +55,7 @@ class RenderTreeCombiner {
 
     // Returns a current submission object that can be passed into a renderer
     // for rasterization.  If the render tree does not exist, this will
-    // return a base::nullopt.
+    // return a std::nullopt.
     base::Optional<renderer::Submission> GetCurrentSubmission();
 
    private:
@@ -83,7 +83,7 @@ class RenderTreeCombiner {
 
   // Returns a current submission object that can be passed into a renderer
   // for rasterization.  If no layers with render trees exist, this will return
-  // a base::nullopt.
+  // a std::nullopt.
   base::Optional<renderer::Submission> GetCurrentSubmission();
 
   // Names a single layer as the one responsible for providing the timeline

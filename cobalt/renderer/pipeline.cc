@@ -390,7 +390,7 @@ void Pipeline::ClearCurrentRenderTree() {
   if (watchdog) watchdog->Unregister(kWatchdogName);
 
   ResetSubmissionQueue();
-  rasterize_timer_ = base::nullopt;
+  rasterize_timer_ = std::nullopt;
 }
 
 void Pipeline::RasterizeCurrentTree() {
@@ -463,14 +463,14 @@ void Pipeline::RasterizeCurrentTree() {
   if (time_fence_ && submission_queue_->submission_time(
                          base::TimeTicks::Now()) >= *time_fence_) {
     // A time fence was active and we just crossed it, so reset it.
-    time_fence_ = base::nullopt;
+    time_fence_ = std::nullopt;
 
     if (post_fence_submission_) {
       // A submission was waiting to be queued once we passed the time fence,
       // so go ahead and queue it now.
       QueueSubmission(*post_fence_submission_, *post_fence_receipt_time_);
-      post_fence_submission_ = base::nullopt;
-      post_fence_receipt_time_ = base::nullopt;
+      post_fence_submission_ = std::nullopt;
+      post_fence_receipt_time_ = std::nullopt;
     }
   }
 }
@@ -547,8 +547,8 @@ bool Pipeline::RasterizeSubmissionToRenderTarget(
   if (submission.render_tree != last_render_tree_) {
     last_render_tree_ = submission.render_tree;
     last_animated_render_tree_ = NULL;
-    previous_animated_area_ = base::nullopt;
-    last_render_time_ = base::nullopt;
+    previous_animated_area_ = std::nullopt;
+    last_render_time_ = std::nullopt;
   }
 
   // Animate the render tree using the submitted animations.
@@ -635,18 +635,18 @@ void Pipeline::ShutdownSubmissionQueue() {
 
   // Clear out our time fence data, especially |post_fence_submission_| which
   // may refer to a render tree.
-  time_fence_ = base::nullopt;
-  post_fence_submission_ = base::nullopt;
-  post_fence_receipt_time_ = base::nullopt;
+  time_fence_ = std::nullopt;
+  post_fence_submission_ = std::nullopt;
+  post_fence_receipt_time_ = std::nullopt;
 
   // Stop and shutdown the rasterizer timer.  If we won't have a submission
   // queue anymore, we won't be able to rasterize anymore.
-  rasterize_timer_ = base::nullopt;
+  rasterize_timer_ = std::nullopt;
 
   // Do not retain any more references to the current render tree (which
   // may refer to rasterizer resources) or animations which may refer to
   // render trees.
-  submission_queue_ = base::nullopt;
+  submission_queue_ = std::nullopt;
 
   // Shut down our submission disposer thread.  This needs to happen now to
   // ensure that any pending "dispose" messages are processed.  Each disposal
@@ -661,7 +661,7 @@ void Pipeline::ShutdownRasterizerThread() {
   DCHECK_CALLED_ON_VALID_THREAD(rasterizer_thread_checker_);
 
   // Shutdown the FPS overlay which may reference render trees.
-  fps_overlay_ = base::nullopt;
+  fps_overlay_ = std::nullopt;
 
   // Submit a fullscreen rect node to clear the display before shutting
   // down.  This can be helpful if we quit while playing a video via
@@ -800,7 +800,7 @@ void Pipeline::FrameStatsOnFlushCallback(
 
 void Pipeline::ResetSubmissionQueue() {
   TRACE_EVENT0("cobalt::renderer", "Pipeline::ResetSubmissionQueue()");
-  submission_queue_ = base::nullopt;
+  submission_queue_ = std::nullopt;
   submission_queue_.emplace(
       current_timeline_info_.max_submission_queue_size,
       base::TimeDelta::FromMillisecondsD(kTimeToConvergeInMS),

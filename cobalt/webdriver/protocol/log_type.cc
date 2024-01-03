@@ -25,7 +25,7 @@ base::Optional<LogType> LogType::FromValue(const base::Value* value) {
       dictionary_value->GetString("type", &type)) {
     return LogType(type);
   }
-  return base::nullopt;
+  return std::nullopt;
 }
 
 }  // namespace protocol

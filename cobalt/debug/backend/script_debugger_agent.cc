@@ -83,7 +83,7 @@ base::Optional<Command> ScriptDebuggerAgent::RunCommand(Command command) {
   if (script_debugger_->DispatchProtocolMessage(method,
                                                 JSONStringify(message))) {
     // The command has been dispatched; keep ownership of it in the map.
-    return base::nullopt;
+    return std::nullopt;
   }
 
   // Take the command back out of the map and return it for fallback.

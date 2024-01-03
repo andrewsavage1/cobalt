@@ -319,7 +319,7 @@ void optionalNullableArgumentsWithDefaultsMethod(const v8::FunctionCallbackInfo<
   }
   // Optional arguments with default values
   TypeTraits<base::Optional<bool > >::ConversionType arg1 =
-      base::nullopt;
+      std::nullopt;
   TypeTraits<scoped_refptr<ArbitraryInterface> >::ConversionType arg2 =
       NULL;
   size_t num_set_arguments = 2;

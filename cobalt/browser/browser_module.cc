@@ -191,7 +191,7 @@ void OnScreenshotMessage(BrowserModule* browser_module,
   base::FilePath output_path = dir.Append(screenshot_file_name);
   browser_module->RequestScreenshotToFile(
       output_path, loader::image::EncodedStaticImage::ImageFormat::kPNG,
-      /*clip_rect=*/base::nullopt,
+      /*clip_rect=*/std::nullopt,
       base::Bind(&ScreenshotCompleteCallback, output_path));
 }
 
@@ -1153,7 +1153,7 @@ void BrowserModule::OnDebugConsoleRenderTreeProduced(
     if (!debug_console_layer_->HasRenderTree()) {
       return;
     }
-    debug_console_layer_->Submit(base::nullopt);
+    debug_console_layer_->Submit(std::nullopt);
   } else {
     debug_console_layer_->Submit(
         CreateSubmissionFromLayoutResults(layout_results));

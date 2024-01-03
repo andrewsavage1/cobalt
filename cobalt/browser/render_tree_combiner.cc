@@ -30,8 +30,8 @@ namespace browser {
 
 RenderTreeCombiner::Layer::Layer(RenderTreeCombiner* render_tree_combiner)
     : render_tree_combiner_(render_tree_combiner),
-      render_tree_(base::nullopt),
-      receipt_time_(base::nullopt) {}
+      render_tree_(std::nullopt),
+      receipt_time_(std::nullopt) {}
 
 RenderTreeCombiner::Layer::~Layer() {
   DCHECK(render_tree_combiner_);
@@ -47,7 +47,7 @@ void RenderTreeCombiner::Layer::Submit(
 base::Optional<renderer::Submission>
 RenderTreeCombiner::Layer::GetCurrentSubmission() {
   if (!render_tree_) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   base::Optional<base::TimeDelta> current_time_offset = CurrentTimeOffset();
@@ -64,7 +64,7 @@ RenderTreeCombiner::Layer::GetCurrentSubmission() {
 
 base::Optional<base::TimeDelta> RenderTreeCombiner::Layer::CurrentTimeOffset() {
   if (!receipt_time_) {
-    return base::nullopt;
+    return std::nullopt;
   } else {
     return render_tree_->time_offset +
            (base::TimeTicks::Now() - *receipt_time_);
@@ -125,7 +125,7 @@ RenderTreeCombiner::GetCurrentSubmission() {
     }
   }
   if (!first_layer_with_render_tree) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   Layer* timeline_layer = (timeline_layer_ && timeline_layer_->render_tree_)

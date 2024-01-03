@@ -60,7 +60,7 @@ def is_array_buffer_or_view_type(idl_type):
 def idl_literal_to_cobalt_literal(idl_type, idl_literal):
   """Map IDL literal to the corresponding cobalt value."""
   if idl_literal.is_null and not idl_type.is_interface_type:
-    return 'base::nullopt'
+    return 'std::nullopt'
   if idl_type.is_enum:
     return convert_to_cobalt_enumeration_value(idl_type, idl_literal.value)
   return str(idl_literal)

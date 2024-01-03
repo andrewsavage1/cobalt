@@ -22,7 +22,7 @@ namespace absl {
 template<typename T>
 using optional = base::Optional<T>;
 
-using base::nullopt;
+using std::nullopt;
 
 }  // namespace absl
 

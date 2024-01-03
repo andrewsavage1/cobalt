@@ -716,13 +716,13 @@ base::Optional<std::string> XMLHttpRequestImpl::GetResponseHeader(
 
   if (state_ == XMLHttpRequest::kUnsent || state_ == XMLHttpRequest::kOpened ||
       error_) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   // Set-Cookie should be stripped from the response headers in OnDone().
   if (base::LowerCaseEqualsASCII(header, "set-cookie") ||
       base::LowerCaseEqualsASCII(header, "set-cookie2")) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   bool found;
@@ -733,7 +733,7 @@ base::Optional<std::string> XMLHttpRequestImpl::GetResponseHeader(
   } else {
     found = http_response_headers_->GetNormalizedHeader(header, &value);
   }
-  return found ? base::make_optional(value) : base::nullopt;
+  return found ? base::make_optional(value) : std::nullopt;
 }
 
 std::string XMLHttpRequestImpl::GetAllResponseHeaders() {
@@ -803,7 +803,7 @@ base::Optional<XMLHttpRequest::ResponseType> XMLHttpRequestImpl::response(
       script::Handle<script::ArrayBuffer> maybe_array_buffer_response =
           response_array_buffer();
       if (maybe_array_buffer_response.IsEmpty()) {
-        return base::nullopt;
+        return std::nullopt;
       }
       return XMLHttpRequest::ResponseType(maybe_array_buffer_response);
     }
@@ -814,7 +814,7 @@ base::Optional<XMLHttpRequest::ResponseType> XMLHttpRequestImpl::response(
       NOTIMPLEMENTED() << "Unsupported response_type_ "
                        << response_type(exception_state);
   }
-  return base::nullopt;
+  return std::nullopt;
 }
 
 int XMLHttpRequestImpl::status() const {

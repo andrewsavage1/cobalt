@@ -72,7 +72,7 @@ base::Optional<TestInfo> ParseLayoutTestCaseLine(
   TrimWhitespaceASCII(file_path_tokens[0], base::TRIM_ALL,
                       &base_file_path_string);
   if (base_file_path_string.empty()) {
-    return base::nullopt;
+    return std::nullopt;
   }
   base::FilePath base_file_path(top_level.Append(base_file_path_string));
 

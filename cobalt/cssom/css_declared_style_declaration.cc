@@ -100,7 +100,7 @@ unsigned int CSSDeclaredStyleDeclaration::length() const {
 base::Optional<std::string> CSSDeclaredStyleDeclaration::Item(
     unsigned int index) const {
   const char* item = data_ ? data_->Item(index) : NULL;
-  return item ? base::Optional<std::string>(item) : base::nullopt;
+  return item ? base::Optional<std::string>(item) : std::nullopt;
 }
 
 std::string CSSDeclaredStyleDeclaration::GetDeclaredPropertyValueStringByKey(

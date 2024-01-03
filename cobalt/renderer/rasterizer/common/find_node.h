@@ -55,7 +55,7 @@ NodeSearchResult<T> FindNode(
     NodeFilterFunction<T> typed_filter_function = base::Bind([](T*) {
       return true;
     }),
-    base::Optional<NodeReplaceFunction> replace_function = base::nullopt) {
+    base::Optional<NodeReplaceFunction> replace_function = std::nullopt) {
   // Wrap the typed filter with an untyped callback.
   auto type_checking_filter_function = base::Bind(
       [](NodeFilterFunction<T> typed_filter_function, render_tree::Node* node) {

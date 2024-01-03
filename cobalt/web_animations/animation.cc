@@ -69,14 +69,14 @@ void Animation::Play() {
 // https://www.w3.org/TR/2015/WD-web-animations-1-20150707/#cancel-an-animation
 void Animation::Cancel() {
   // 5.  Make animation's start time unresolved.
-  data_.set_start_time(base::nullopt);
+  data_.set_start_time(std::nullopt);
 
   UpdatePendingTasks();
 }
 
 base::Optional<base::TimeDelta> Animation::current_time_as_time_delta() const {
   if (!timeline_) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   return data_.ComputeLocalTimeFromTimelineTime(
@@ -87,7 +87,7 @@ base::Optional<base::TimeDelta> Animation::current_time_as_time_delta() const {
 base::Optional<double> Animation::current_time() const {
   base::Optional<base::TimeDelta> current_time = current_time_as_time_delta();
   return current_time ? base::Optional<double>(current_time->InMillisecondsF())
-                      : base::nullopt;
+                      : std::nullopt;
 }
 
 namespace {
@@ -102,7 +102,7 @@ Animation::Data::ComputeLocalTimeFromTimelineTime(
     const base::Optional<base::TimeDelta>& timeline_time) const {
   // TODO: Take into account the hold time.
   if (!timeline_time || !start_time_) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   return ScaleTime(*timeline_time - *start_time_, playback_rate_);
@@ -112,7 +112,7 @@ base::Optional<base::TimeDelta>
 Animation::Data::ComputeTimelineTimeFromLocalTime(
     const base::Optional<base::TimeDelta>& local_time) const {
   if (!start_time_ || !local_time) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   if (local_time == base::TimeDelta::Max()) {

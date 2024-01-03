@@ -71,24 +71,24 @@ TEST_F(NullableTypesBindingsTest, GetNullProperty) {
   std::string result;
 
   EXPECT_CALL(test_mock(), nullable_boolean_property())
-      .WillOnce(Return(base::nullopt));
+      .WillOnce(Return(std::nullopt));
   EXPECT_TRUE(
       EvaluateScript("test.nullableBooleanProperty === null;", &result));
   EXPECT_STREQ("true", result.c_str());
 
   EXPECT_CALL(test_mock(), nullable_numeric_property())
-      .WillOnce(Return(base::nullopt));
+      .WillOnce(Return(std::nullopt));
   EXPECT_TRUE(
       EvaluateScript("test.nullableNumericProperty === null;", &result));
   EXPECT_STREQ("true", result.c_str());
 
   EXPECT_CALL(test_mock(), nullable_string_property())
-      .WillOnce(Return(base::nullopt));
+      .WillOnce(Return(std::nullopt));
   EXPECT_TRUE(EvaluateScript("test.nullableStringProperty === null;", &result));
   EXPECT_STREQ("true", result.c_str());
 
   EXPECT_CALL(test_mock(), nullable_dictionary_property())
-      .WillOnce(Return(base::nullopt));
+      .WillOnce(Return(std::nullopt));
   EXPECT_TRUE(
       EvaluateScript("test.nullableDictionaryProperty === null;", &result));
   EXPECT_STREQ("true", result.c_str());
@@ -141,25 +141,25 @@ TEST_F(NullableTypesBindingsTest, ReturnNullFromOperation) {
   std::string result;
 
   EXPECT_CALL(test_mock(), NullableBooleanOperation())
-      .WillOnce(Return(base::nullopt));
+      .WillOnce(Return(std::nullopt));
   EXPECT_TRUE(
       EvaluateScript("test.nullableBooleanOperation() === null;", &result));
   EXPECT_STREQ("true", result.c_str());
 
   EXPECT_CALL(test_mock(), NullableNumericOperation())
-      .WillOnce(Return(base::nullopt));
+      .WillOnce(Return(std::nullopt));
   EXPECT_TRUE(
       EvaluateScript("test.nullableNumericOperation() === null;", &result));
   EXPECT_STREQ("true", result.c_str());
 
   EXPECT_CALL(test_mock(), NullableStringOperation())
-      .WillOnce(Return(base::nullopt));
+      .WillOnce(Return(std::nullopt));
   EXPECT_TRUE(
       EvaluateScript("test.nullableStringOperation() === null;", &result));
   EXPECT_STREQ("true", result.c_str());
 
   EXPECT_CALL(test_mock(), NullableDictionaryOperation())
-      .WillOnce(Return(base::nullopt));
+      .WillOnce(Return(std::nullopt));
   EXPECT_TRUE(
       EvaluateScript("test.nullableDictionaryOperation() === null;", &result));
   EXPECT_STREQ("true", result.c_str());

@@ -54,7 +54,7 @@ class CommandMap : public std::map<std::string, CommandFn> {
     if (iter == this->end()) return base::make_optional(std::move(command));
     auto command_impl = iter->second;
     command_impl.Run(std::move(command));
-    return base::nullopt;
+    return std::nullopt;
   }
 
   // Binds |RunCommand| to a callback to be registered with |DebugDispatcher|.

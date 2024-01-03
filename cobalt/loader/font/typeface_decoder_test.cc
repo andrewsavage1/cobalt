@@ -133,7 +133,7 @@ std::vector<uint8> GetTypefaceData(const base::FilePath& file_path) {
 // Test that we can decode a ttf typeface received in one chunk.
 TEST(TypefaceDecoderTest, DecodeTtfTypeface) {
   MockTypefaceDecoder typeface_decoder;
-  typeface_decoder.ExpectOnCompleteWithError(base::nullopt);
+  typeface_decoder.ExpectOnCompleteWithError(std::nullopt);
 
   std::vector<uint8> typeface_data =
       GetTypefaceData(GetTestTypefacePath(kTtfTestTypeface));
@@ -147,7 +147,7 @@ TEST(TypefaceDecoderTest, DecodeTtfTypeface) {
 // Test that we can decode a ttf typeface received in multiple chunks.
 TEST(TypefaceDecoderTest, DecodeTtfTypefaceWithMultipleChunks) {
   MockTypefaceDecoder typeface_decoder;
-  typeface_decoder.ExpectOnCompleteWithError(base::nullopt);
+  typeface_decoder.ExpectOnCompleteWithError(std::nullopt);
 
   std::vector<uint8> typeface_data =
       GetTypefaceData(GetTestTypefacePath(kTtfTestTypeface));
@@ -166,7 +166,7 @@ TEST(TypefaceDecoderTest, DecodeTtfTypefaceWithMultipleChunks) {
 // Test that we can decode a woff typeface received in one chunk.
 TEST(TypefaceDecoderTest, DecodeWoffTypeface) {
   MockTypefaceDecoder typeface_decoder;
-  typeface_decoder.ExpectOnCompleteWithError(base::nullopt);
+  typeface_decoder.ExpectOnCompleteWithError(std::nullopt);
 
   std::vector<uint8> typeface_data =
       GetTypefaceData(GetTestTypefacePath(kWoffTestTypeface));
@@ -180,7 +180,7 @@ TEST(TypefaceDecoderTest, DecodeWoffTypeface) {
 // Test that we can decode a woff typeface received in multiple chunks.
 TEST(TypefaceDecoderTest, DecodeWoffTypefaceWithMultipleChunks) {
   MockTypefaceDecoder typeface_decoder;
-  typeface_decoder.ExpectOnCompleteWithError(base::nullopt);
+  typeface_decoder.ExpectOnCompleteWithError(std::nullopt);
 
   std::vector<uint8> typeface_data =
       GetTypefaceData(GetTestTypefacePath(kWoffTestTypeface));
@@ -199,7 +199,7 @@ TEST(TypefaceDecoderTest, DecodeWoffTypefaceWithMultipleChunks) {
 // Test that we can decode a woff2 typeface received in one chunk.
 TEST(TypefaceDecoderTest, DecodeWoff2Typeface) {
   MockTypefaceDecoder typeface_decoder;
-  typeface_decoder.ExpectOnCompleteWithError(base::nullopt);
+  typeface_decoder.ExpectOnCompleteWithError(std::nullopt);
 
   std::vector<uint8> typeface_data =
       GetTypefaceData(GetTestTypefacePath(kWoff2TestTypeface));
@@ -213,7 +213,7 @@ TEST(TypefaceDecoderTest, DecodeWoff2Typeface) {
 // Test that we can decode a woff2 typeface received in multiple chunks.
 TEST(TypefaceDecoderTest, DecodeWoff2TypefaceWithMultipleChunks) {
   MockTypefaceDecoder typeface_decoder;
-  typeface_decoder.ExpectOnCompleteWithError(base::nullopt);
+  typeface_decoder.ExpectOnCompleteWithError(std::nullopt);
 
   std::vector<uint8> typeface_data =
       GetTypefaceData(GetTestTypefacePath(kWoff2TestTypeface));

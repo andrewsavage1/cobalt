@@ -163,7 +163,7 @@ void MicrophoneManager::DestroyInternal() {
 
   microphone_.reset();
   state_ = kStopped;
-  poll_mic_events_timer_ = base::nullopt;
+  poll_mic_events_timer_ = std::nullopt;
 }
 
 }  // namespace speech

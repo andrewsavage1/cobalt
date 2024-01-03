@@ -383,7 +383,7 @@ base::Optional<cssom::ViewportSize> GetRequestedViewportSize(
     base::CommandLine* command_line) {
   DCHECK(command_line);
   if (!command_line->HasSwitch(browser::switches::kViewport)) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   std::string switch_value =
@@ -394,13 +394,13 @@ base::Optional<cssom::ViewportSize> GetRequestedViewportSize(
 
   if (lengths.empty()) {
     DLOG(ERROR) << "Viewport " << switch_value << " is invalid.";
-    return base::nullopt;
+    return std::nullopt;
   }
 
   int width = 0;
   if (!base::StringToInt(lengths[0], &width)) {
     DLOG(ERROR) << "Viewport " << switch_value << " has invalid width.";
-    return base::nullopt;
+    return std::nullopt;
   }
 
   if (lengths.size() < 2) {
@@ -416,7 +416,7 @@ base::Optional<cssom::ViewportSize> GetRequestedViewportSize(
   int height = 0;
   if (!base::StringToInt(lengths[1], &height)) {
     DLOG(ERROR) << "Viewport " << switch_value << " has invalid height.";
-    return base::nullopt;
+    return std::nullopt;
   }
 
   if (lengths.size() < 3) {
@@ -428,7 +428,7 @@ base::Optional<cssom::ViewportSize> GetRequestedViewportSize(
     if (!base::StringToDouble(lengths[2], &screen_diagonal_inches)) {
       DLOG(ERROR) << "Viewport " << switch_value
                   << " has invalid screen_diagonal_inches.";
-      return base::nullopt;
+      return std::nullopt;
     }
   }
 
@@ -437,7 +437,7 @@ base::Optional<cssom::ViewportSize> GetRequestedViewportSize(
     if (!base::StringToDouble(lengths[3], &video_pixel_ratio)) {
       DLOG(ERROR) << "Viewport " << switch_value
                   << " has invalid video_pixel_ratio.";
-      return base::nullopt;
+      return std::nullopt;
     }
   }
 

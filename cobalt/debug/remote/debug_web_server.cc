@@ -76,7 +76,7 @@ base::Optional<base::FilePath> AppendIndexFile(
     return result;
   }
   DLOG(ERROR) << "No index file found at: " << directory.value();
-  return base::nullopt;
+  return std::nullopt;
 }
 
 const char kContentDir[] = "debug_remote";

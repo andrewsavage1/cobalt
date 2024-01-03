@@ -136,32 +136,32 @@ base::Optional<std::string> SplashScreenCache::GetKeyForStartConfig(
     const GURL& url, const base::Optional<std::string>& topic) const {
   base::Optional<std::string> encoded_url = base::GetApplicationKey(url);
   if (!encoded_url) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   std::vector<char> path(kSbFileMaxPath, 0);
   bool has_cache_dir =
       SbSystemGetPath(kSbSystemPathCacheDirectory, path.data(), kSbFileMaxPath);
   if (!has_cache_dir) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   std::string subpath = "";
   if (!AddPathDirectory(std::string("splash_screen"), path, subpath)) {
-    return base::nullopt;
+    return std::nullopt;
   }
   if (!AddPathDirectory(*encoded_url, path, subpath)) {
-    return base::nullopt;
+    return std::nullopt;
   }
   if (topic && !topic.value().empty()) {
     std::string encoded_topic;
     base::Base64Encode(topic.value(), &encoded_topic);
     if (!AddPathDirectory(encoded_topic, path, subpath)) {
-      return base::nullopt;
+      return std::nullopt;
     }
   }
   if (!AddPathDirectory(std::string("splash.html"), path, subpath)) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   return subpath.erase(0, 1);  // Remove leading separator

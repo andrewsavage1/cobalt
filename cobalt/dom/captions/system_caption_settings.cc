@@ -184,7 +184,7 @@ base::Optional<std::string> SystemCaptionSettings::background_color() {
   bool success = SbAccessibilityGetCaptionSettings(&caption_settings);
 
   if (!success) {
-    return base::nullopt;
+    return std::nullopt;
   }
   DCHECK(caption_settings.background_color_state !=
          kSbAccessibilityCaptionStateUnsupported);
@@ -192,7 +192,7 @@ base::Optional<std::string> SystemCaptionSettings::background_color() {
   const char* color = SystemCaptionSettings::CaptionColorToString(
       ToCobaltCaptionColor(caption_settings.background_color));
   if (color == nullptr) {
-    return base::nullopt;
+    return std::nullopt;
   } else {
     return std::string(color);
   }
@@ -215,7 +215,7 @@ base::Optional<std::string> SystemCaptionSettings::background_opacity() {
   bool success = SbAccessibilityGetCaptionSettings(&caption_settings);
 
   if (!success) {
-    return base::nullopt;
+    return std::nullopt;
   }
   DCHECK(caption_settings.background_opacity_state !=
          kSbAccessibilityCaptionStateUnsupported);
@@ -223,7 +223,7 @@ base::Optional<std::string> SystemCaptionSettings::background_opacity() {
   const char* opacity = SystemCaptionSettings::CaptionOpacityPercentageToString(
       ToCobaltCaptionOpacityPercentage(caption_settings.background_opacity));
   if (opacity == nullptr) {
-    return base::nullopt;
+    return std::nullopt;
   } else {
     return std::string(opacity);
   }
@@ -246,7 +246,7 @@ base::Optional<std::string> SystemCaptionSettings::character_edge_style() {
   bool success = SbAccessibilityGetCaptionSettings(&caption_settings);
 
   if (!success) {
-    return base::nullopt;
+    return std::nullopt;
   }
   DCHECK(caption_settings.character_edge_style_state !=
          kSbAccessibilityCaptionStateUnsupported);
@@ -256,7 +256,7 @@ base::Optional<std::string> SystemCaptionSettings::character_edge_style() {
           ToCobaltCaptionCharacterEdgeStyle(
               caption_settings.character_edge_style));
   if (character_edge_style == nullptr) {
-    return base::nullopt;
+    return std::nullopt;
   } else {
     return std::string(character_edge_style);
   }
@@ -279,7 +279,7 @@ base::Optional<std::string> SystemCaptionSettings::font_color() {
   bool success = SbAccessibilityGetCaptionSettings(&caption_settings);
 
   if (!success) {
-    return base::nullopt;
+    return std::nullopt;
   }
   DCHECK(caption_settings.font_color_state !=
          kSbAccessibilityCaptionStateUnsupported);
@@ -287,7 +287,7 @@ base::Optional<std::string> SystemCaptionSettings::font_color() {
   const char* color = SystemCaptionSettings::CaptionColorToString(
       ToCobaltCaptionColor(caption_settings.font_color));
   if (color == nullptr) {
-    return base::nullopt;
+    return std::nullopt;
   } else {
     return std::string(color);
   }
@@ -310,7 +310,7 @@ base::Optional<std::string> SystemCaptionSettings::font_family() {
   bool success = SbAccessibilityGetCaptionSettings(&caption_settings);
 
   if (!success) {
-    return base::nullopt;
+    return std::nullopt;
   }
   DCHECK(caption_settings.font_family_state !=
          kSbAccessibilityCaptionStateUnsupported);
@@ -318,7 +318,7 @@ base::Optional<std::string> SystemCaptionSettings::font_family() {
   const char* font_family = SystemCaptionSettings::CaptionFontFamilyToString(
       ToCobaltCaptionFontFamily(caption_settings.font_family));
   if (font_family == nullptr) {
-    return base::nullopt;
+    return std::nullopt;
   } else {
     return std::string(font_family);
   }
@@ -341,7 +341,7 @@ base::Optional<std::string> SystemCaptionSettings::font_opacity() {
   bool success = SbAccessibilityGetCaptionSettings(&caption_settings);
 
   if (!success) {
-    return base::nullopt;
+    return std::nullopt;
   }
   DCHECK(caption_settings.font_opacity_state !=
          kSbAccessibilityCaptionStateUnsupported);
@@ -349,7 +349,7 @@ base::Optional<std::string> SystemCaptionSettings::font_opacity() {
   const char* opacity = SystemCaptionSettings::CaptionOpacityPercentageToString(
       ToCobaltCaptionOpacityPercentage(caption_settings.font_opacity));
   if (opacity == nullptr) {
-    return base::nullopt;
+    return std::nullopt;
   } else {
     return std::string(opacity);
   }
@@ -372,7 +372,7 @@ base::Optional<std::string> SystemCaptionSettings::font_size() {
   bool success = SbAccessibilityGetCaptionSettings(&caption_settings);
 
   if (!success) {
-    return base::nullopt;
+    return std::nullopt;
   }
   DCHECK(caption_settings.font_size_state !=
          kSbAccessibilityCaptionStateUnsupported);
@@ -381,7 +381,7 @@ base::Optional<std::string> SystemCaptionSettings::font_size() {
       SystemCaptionSettings::CaptionFontSizePercentageToString(
           ToCobaltCaptionFontSizePercentage(caption_settings.font_size));
   if (font_size == nullptr) {
-    return base::nullopt;
+    return std::nullopt;
   } else {
     return std::string(font_size);
   }
@@ -404,7 +404,7 @@ base::Optional<std::string> SystemCaptionSettings::window_color() {
   bool success = SbAccessibilityGetCaptionSettings(&caption_settings);
 
   if (!success) {
-    return base::nullopt;
+    return std::nullopt;
   }
   DCHECK(caption_settings.window_color_state !=
          kSbAccessibilityCaptionStateUnsupported);
@@ -412,7 +412,7 @@ base::Optional<std::string> SystemCaptionSettings::window_color() {
   const char* color = SystemCaptionSettings::CaptionColorToString(
       ToCobaltCaptionColor(caption_settings.window_color));
   if (color == nullptr) {
-    return base::nullopt;
+    return std::nullopt;
   } else {
     return std::string(color);
   }
@@ -435,7 +435,7 @@ base::Optional<std::string> SystemCaptionSettings::window_opacity() {
   bool success = SbAccessibilityGetCaptionSettings(&caption_settings);
 
   if (!success) {
-    return base::nullopt;
+    return std::nullopt;
   }
   DCHECK(caption_settings.window_opacity_state !=
          kSbAccessibilityCaptionStateUnsupported);
@@ -443,7 +443,7 @@ base::Optional<std::string> SystemCaptionSettings::window_opacity() {
   const char* opacity = SystemCaptionSettings::CaptionOpacityPercentageToString(
       ToCobaltCaptionOpacityPercentage(caption_settings.window_opacity));
   if (opacity == nullptr) {
-    return base::nullopt;
+    return std::nullopt;
   } else {
     return std::string(opacity);
   }

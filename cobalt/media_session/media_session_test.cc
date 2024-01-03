@@ -503,7 +503,7 @@ TEST(MediaSessionTest, PositionState) {
 
   // Position state cleared
   EXPECT_CALL(*session, GetMonotonicNow()).WillOnce(Return(start_time));
-  session->SetPositionState(base::nullopt);
+  session->SetPositionState(std::nullopt);
   session->mock_session_client()->WaitForSessionStateChange();
   state = session->mock_session_client()->GetMediaSessionState();
   EXPECT_EQ(0,

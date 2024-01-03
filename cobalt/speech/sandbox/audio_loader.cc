@@ -62,14 +62,14 @@ class DummyDecoder : public loader::Decoder {
     if (buffer_.size() == 0) {
       // No data loaded.
       if (!load_complete_callback_.is_null()) {
-        load_complete_callback_.Run(base::nullopt);
+        load_complete_callback_.Run(std::nullopt);
       }
       done_callback_.Run(NULL, 0);
       return;
     }
 
     if (!load_complete_callback_.is_null()) {
-      load_complete_callback_.Run(base::nullopt);
+      load_complete_callback_.Run(std::nullopt);
     }
     done_callback_.Run(reinterpret_cast<uint8*>(&buffer_[0]), buffer_.size());
   }

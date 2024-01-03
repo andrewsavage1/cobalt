@@ -71,7 +71,7 @@ class ScriptExecutorParams : public script::Wrappable {
   static GCPreventedParams Create(
       const scoped_refptr<script::GlobalEnvironment>& global_environment,
       const std::string& function_body, const std::string& json_args) {
-    return Create(global_environment, function_body, json_args, base::nullopt);
+    return Create(global_environment, function_body, json_args, std::nullopt);
   }
 
   static GCPreventedParams Create(

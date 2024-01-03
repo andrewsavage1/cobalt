@@ -179,23 +179,23 @@ TEST(AutoMemSettingsTest, ParseDimensionsLower) {
 }
 
 TEST(AutoMemSettingsTest, ParseDimensionsOne) {
-  TestParseDimensions(base::nullopt, "1234");
+  TestParseDimensions(std::nullopt, "1234");
 }
 
 TEST(AutoMemSettingsTest, ParseDimensionsOneX) {
-  TestParseDimensions(base::nullopt, "1234x");
+  TestParseDimensions(std::nullopt, "1234x");
 }
 
 TEST(AutoMemSettingsTest, ParseDimensionsTwoX) {
-  TestParseDimensions(base::nullopt, "1234x5678x");
+  TestParseDimensions(std::nullopt, "1234x5678x");
 }
 
 TEST(AutoMemSettingsTest, ParseDimensionsBadNum1) {
-  TestParseDimensions(base::nullopt, "ABCDx1234");
+  TestParseDimensions(std::nullopt, "ABCDx1234");
 }
 
 TEST(AutoMemSettingsTest, ParseDimensionsBadNum2) {
-  TestParseDimensions(base::nullopt, "1234xABCD");
+  TestParseDimensions(std::nullopt, "1234xABCD");
 }
 
 TEST(AutoMemSettingsTest, ParseDimensionsUpper) {

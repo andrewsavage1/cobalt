@@ -388,7 +388,7 @@ bool ParserImpl::Parse() {
   // For more information on error codes
   // see http://www.gnu.org/software/bison/manual/html_node/Parser-Function.html
   TRACE_EVENT0("cobalt::css_parser", "ParseImpl::Parse");
-  last_syntax_error_location_ = ::base::nullopt;
+  last_syntax_error_location_ = ::std::nullopt;
   int error_code(yyparse(this, &scanner_));
   switch (error_code) {
     case 0:

@@ -68,7 +68,7 @@ base::Optional<WebPlatformTestInfo> ParseWebPlatformTestCaseLine(
       line_string, ",", base::KEEP_WHITESPACE, base::SPLIT_WANT_NONEMPTY);
   if (test_case_tokens.size() < 2) {
     DLOG(WARNING) << "Failed to parse: " << line_string;
-    return base::nullopt;
+    return std::nullopt;
   }
 
   for (size_t i = 0; i < test_case_tokens.size(); ++i) {
@@ -79,7 +79,7 @@ base::Optional<WebPlatformTestInfo> ParseWebPlatformTestCaseLine(
   std::string test_expect = base::ToLowerASCII(test_case_tokens[1]);
   WebPlatformTestInfo::State expectation = StringToExpectation(test_expect);
   if (expectation == WebPlatformTestInfo::kDisable) {
-    return base::nullopt;
+    return std::nullopt;
   } else {
     WebPlatformTestInfo test_info;
     test_info.url = test_case_tokens[0];

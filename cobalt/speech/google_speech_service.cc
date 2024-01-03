@@ -293,7 +293,7 @@ base::Optional<std::string> GoogleSpeechService::GetSpeechAPIKey() {
   if (result) {
     return std::string(buffer);
   } else {
-    return base::nullopt;
+    return std::nullopt;
   }
 }
 

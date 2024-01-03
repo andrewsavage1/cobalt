@@ -28,7 +28,7 @@ base::Optional<WindowId> WindowId::FromValue(const base::Value* value) {
       dictionary_value->GetString(kWindowNameKey, &window_id)) {
     return WindowId(window_id);
   }
-  return base::nullopt;
+  return std::nullopt;
 }
 
 }  // namespace protocol

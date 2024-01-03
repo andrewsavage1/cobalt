@@ -665,7 +665,7 @@ void HTMLMediaElement::CreateMediaPlayer() {
   TRACE_EVENT0("cobalt::dom", "HTMLMediaElement::CreateMediaPlayer()");
   LOG(INFO) << "Create media player.";
   if (src().empty()) {
-    reduced_image_cache_capacity_request_ = base::nullopt;
+    reduced_image_cache_capacity_request_ = std::nullopt;
   } else if (html_element_context()
                  ->reduced_image_cache_capacity_manager()
                  ->reduced_capacity_percentage() != 1.0f) {
@@ -932,7 +932,7 @@ void HTMLMediaElement::ClearMediaPlayer() {
   pending_load_ = false;
   load_state_ = kWaitingForSource;
 
-  reduced_image_cache_capacity_request_ = base::nullopt;
+  reduced_image_cache_capacity_request_ = std::nullopt;
 
   if (node_document()) {
     node_document()->OnDOMMutation();

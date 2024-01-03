@@ -33,7 +33,7 @@ base::Optional<std::string> TryConvertAttributeNameToPropertyName(
     const std::string& attribute_name) {
   // First five characters of attribute name should be "data-".
   if (attribute_name.compare(0, kDataPrefixLength, kDataPrefix) != 0) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   // For each "-" (U+002D) character in the name that is followed by
@@ -61,7 +61,7 @@ base::Optional<std::string> TryConvertAttributeNameToPropertyName(
     // Attribute name should not contain uppercase ASCII characters.
     if (base::ToLowerASCII(attribute_name_character) !=
         attribute_name_character) {
-      return base::nullopt;
+      return std::nullopt;
     }
 
     // Convert to uppercase character if preceded by hyphen.
@@ -102,7 +102,7 @@ base::Optional<std::string> TryConvertPropertyNameToAttributeName(
     // a lowercase ASCII letter, abort these steps.
     if (preceded_by_hyphen && base::ToUpperASCII(property_name_character) !=
                                   property_name_character) {
-      return base::nullopt;
+      return std::nullopt;
     }
 
     // For each uppercase ASCII letter in name, insert a "-" (U+002D) character
@@ -137,7 +137,7 @@ base::Optional<std::string> DOMStringMap::AnonymousNamedGetter(
   } else {
     exception_state->SetSimpleException(script::kSyntaxError,
                                         property_name.c_str());
-    return base::nullopt;
+    return std::nullopt;
   }
 }
 

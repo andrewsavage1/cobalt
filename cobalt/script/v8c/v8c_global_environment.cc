@@ -505,7 +505,7 @@ v8::MaybeLocal<v8::Script> V8cGlobalEnvironment::Compile(
           TRACE_EVENT0("cobalt::script", "v8::Script::Compile()");
           if (!v8::Script::Compile(context, source, &script_origin)
                    .ToLocal(&script)) {
-            return std::make_pair(/*data=*/nullptr, /*metadata=*/base::nullopt);
+            return std::make_pair(/*data=*/nullptr, /*metadata=*/std::nullopt);
           }
         }
         std::unique_ptr<v8::ScriptCompiler::CachedData> cached_data(
@@ -513,7 +513,7 @@ v8::MaybeLocal<v8::Script> V8cGlobalEnvironment::Compile(
         return std::make_pair(
             std::make_unique<std::vector<uint8_t>>(
                 cached_data->data, cached_data->data + cached_data->length),
-            /*metadata=*/base::nullopt);
+            /*metadata=*/std::nullopt);
       });
   if (!retrieved_cached_data) {
     return {};

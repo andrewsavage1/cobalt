@@ -30,7 +30,7 @@ class ScriptObjectOwner {
     if (!object.IsNull()) {
       reference_.emplace(owner_, object);
     } else {
-      reference_ = base::nullopt;
+      reference_ = std::nullopt;
     }
   }
   typename T::Reference& reference() { return reference_.value(); }

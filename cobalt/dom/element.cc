@@ -183,7 +183,7 @@ base::Optional<std::string> Element::GetAttribute(
     }
   }
 
-  return base::nullopt;
+  return std::nullopt;
 }
 
 // Algorithm for SetAttribute:
@@ -617,7 +617,7 @@ base::Optional<std::string> Element::GetStyleAttribute() const {
   if (iter != attribute_map_.end()) {
     return iter->second;
   }
-  return base::nullopt;
+  return std::nullopt;
 }
 
 void Element::SetStyleAttribute(const std::string& value) {

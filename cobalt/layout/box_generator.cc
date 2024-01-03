@@ -365,9 +365,9 @@ void BoxGenerator::VisitVideoElement(dom::HTMLVideoElement* video_element) {
       decode_target_provider
           ? base::Bind(GetVideoFrame, decode_target_provider, resource_provider)
           : ReplacedBox::ReplaceImageCB(),
-      video_element->GetSetBoundsCB(), *paragraph_, text_position,
-      base::nullopt, base::nullopt, base::nullopt, context_, replaced_box_mode,
-      video_element->GetVideoSize(), base::nullopt);
+      video_element->GetSetBoundsCB(), *paragraph_, text_position, std::nullopt,
+      std::nullopt, std::nullopt, context_, replaced_box_mode,
+      video_element->GetVideoSize(), std::nullopt);
   video_element->computed_style()->display()->Accept(&replaced_box_generator);
 
   scoped_refptr<ReplacedBox> replaced_box =
@@ -442,8 +442,8 @@ void BoxGenerator::VisitLottiePlayer(dom::LottiePlayer* lottie_player) {
           ? base::Bind(GetLottieAnimation,
                        lottie_player->cached_image()->TryGetResource())
           : ReplacedBox::ReplaceImageCB(),
-      ReplacedBox::SetBoundsCB(), *paragraph_, text_position, base::nullopt,
-      base::nullopt, base::nullopt, context_,
+      ReplacedBox::SetBoundsCB(), *paragraph_, text_position, std::nullopt,
+      std::nullopt, std::nullopt, context_,
       ReplacedBox::ReplacedBoxMode::kLottie,
       math::Size() /* only relevant to punch out video */,
       lottie_player->GetProperties());

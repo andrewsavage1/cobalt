@@ -93,7 +93,7 @@ base::Optional<ChooseConfigResult> ChooseConfig(
     } else {
       LOG(ERROR) << "Could not find a EGLConfig compatible with the specified "
                  << "attributes.";
-      return base::nullopt;
+      return std::nullopt;
     }
   }
 
@@ -127,7 +127,7 @@ base::Optional<ChooseConfigResult> ChooseConfig(
   // We could not find a config with the provided window, return a failure.
   LOG(ERROR) << "Could not find a EGLConfig compatible with the specified "
              << "EGLNativeWindowType object and attributes.";
-  return base::nullopt;
+  return std::nullopt;
 }
 
 }  // namespace

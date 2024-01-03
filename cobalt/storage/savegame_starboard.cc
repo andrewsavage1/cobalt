@@ -182,7 +182,7 @@ bool SavegameStarboard::MigrateFromFallback() {
   }
 
   std::unique_ptr<starboard::StorageRecord> fallback_record;
-  if (!EnsureRecord(&fallback_record, base::nullopt)) {
+  if (!EnsureRecord(&fallback_record, std::nullopt)) {
     DLOG(WARNING) << __FUNCTION__ << ": "
                   << "Failed to open default record.";
     return false;

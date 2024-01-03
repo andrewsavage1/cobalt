@@ -188,8 +188,8 @@ TEST_F(CallbackFunctionTest, CallbackWithNullableParameters) {
   ASSERT_TRUE(function_owner.IsSet());
 
   // Execute the callback
-  FunctionType::ReturnValue value = function_owner.reference().value().Run(
-      base::nullopt, base::nullopt, NULL);
+  FunctionType::ReturnValue value =
+      function_owner.reference().value().Run(std::nullopt, std::nullopt, NULL);
   ASSERT_FALSE(value.exception);
 
   // Verify that each parameter got passed to script as expected.

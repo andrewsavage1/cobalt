@@ -527,7 +527,7 @@ void WebDriverModule::GetServerStatus(
     const WebDriverDispatcher::PathVariableMap* path_variables,
     std::unique_ptr<WebDriverDispatcher::CommandResultHandler> result_handler) {
   DCHECK_CALLED_ON_VALID_THREAD(thread_checker_);
-  result_handler->SendResult(base::nullopt, protocol::Response::kSuccess,
+  result_handler->SendResult(std::nullopt, protocol::Response::kSuccess,
                              protocol::ServerStatus::ToValue(status_));
 }
 
@@ -541,7 +541,7 @@ void WebDriverModule::GetActiveSessions(
   if (session_) {
     sessions.push_back(session_->session_id());
   }
-  result_handler->SendResult(base::nullopt, protocol::Response::kSuccess,
+  result_handler->SendResult(std::nullopt, protocol::Response::kSuccess,
                              util::internal::ToValue(sessions));
 }
 
@@ -589,7 +589,7 @@ void WebDriverModule::DeleteSession(
     }
   }
   // If the session doesn't exist, then this is a no-op.
-  result_handler->SendResult(base::nullopt, protocol::Response::kSuccess,
+  result_handler->SendResult(std::nullopt, protocol::Response::kSuccess,
                              std::unique_ptr<base::Value>());
 }
 
@@ -650,7 +650,7 @@ void WebDriverModule::RequestScreenshot(
 
     CommandResult result =
         Screenshot::RequestScreenshot(get_screenshot_function_,
-                                      /*clip_rect=*/base::nullopt);
+                                      /*clip_rect=*/std::nullopt);
     util::internal::ReturnResponse(session_driver->session_id(), result,
                                    result_handler.get());
   }

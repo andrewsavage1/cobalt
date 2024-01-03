@@ -50,7 +50,7 @@ class Origin {
   };
 
   // Helper function for extracting a tuple from a URL.  If a tuple cannot
-  // be extracted, then base::nullopt is returned.
+  // be extracted, then std::nullopt is returned.
   static base::Optional<Origin::Tuple> GetTupleFromURL(
       const GURL& url, bool recurse_into_blob_paths);
 

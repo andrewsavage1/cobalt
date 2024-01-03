@@ -41,7 +41,7 @@ base::Optional<uint32_t> GetMinSizeToCacheInBytes(
     case disk_cache::ResourceType::kServiceWorkerScript:
       return 1u;
     default:
-      return base::nullopt;
+      return std::nullopt;
   }
 }
 
@@ -55,7 +55,7 @@ base::Optional<std::string> GetSubdirectory(
     case disk_cache::ResourceType::kServiceWorkerScript:
       return "service_worker_js";
     default:
-      return base::nullopt;
+      return std::nullopt;
   }
 }
 
@@ -63,12 +63,12 @@ base::Optional<base::FilePath> GetCacheDirectory(
     disk_cache::ResourceType resource_type) {
   auto subdirectory = GetSubdirectory(resource_type);
   if (!subdirectory) {
-    return base::nullopt;
+    return std::nullopt;
   }
   std::vector<char> path(kSbFileMaxPath, 0);
   if (!SbSystemGetPath(kSbSystemPathCacheDirectory, path.data(),
                        kSbFileMaxPath)) {
-    return base::nullopt;
+    return std::nullopt;
   }
   return base::FilePath(path.data()).Append(subdirectory.value());
 }
@@ -132,7 +132,7 @@ base::Optional<base::Value> Cache::Metadata(
   if (memory_capped_directory) {
     return memory_capped_directory->Metadata(key);
   }
-  return base::nullopt;
+  return std::nullopt;
 }
 
 std::unique_ptr<std::vector<uint8_t>> Cache::Retrieve(
@@ -275,7 +275,7 @@ base::Optional<uint32_t> Cache::GetMaxCacheStorageInBytes(
     case disk_cache::ResourceType::kServiceWorkerScript:
       return disk_cache::kTypeMetadata[resource_type].max_size_bytes;
     default:
-      return base::nullopt;
+      return std::nullopt;
   }
 }
 

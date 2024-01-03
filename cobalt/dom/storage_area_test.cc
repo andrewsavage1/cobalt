@@ -80,7 +80,7 @@ TEST_F(StorageAreaTest, SetItem) {
   scoped_refptr<MockStorage> mock_storage(new MockStorage());
   EXPECT_CALL(*mock_storage,
               DispatchEvent(base::Optional<std::string>("key"),
-                            base::Optional<std::string>(base::nullopt),
+                            base::Optional<std::string>(std::nullopt),
                             base::Optional<std::string>("value")));
   mock_storage->SetItem("key", "value");
 }
@@ -106,7 +106,7 @@ TEST_F(StorageAreaTest, IndexedKeys) {
 
 TEST_F(StorageAreaTest, Overwrite) {
   scoped_refptr<MockStorage> mock_storage(new MockStorage());
-  EXPECT_EQ(base::nullopt, mock_storage->GetItem("key"));
+  EXPECT_EQ(std::nullopt, mock_storage->GetItem("key"));
   EXPECT_CALL(*mock_storage,
               DispatchEvent(ToOptStr("key"), _, ToOptStr("old_value")));
   mock_storage->SetItem("key", "old_value");

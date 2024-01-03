@@ -31,11 +31,11 @@ const char kArgsKey[] = "args";
 base::Optional<Script> Script::FromValue(const base::Value* value) {
   const base::DictionaryValue* dictionary_value;
   if (!value->GetAsDictionary(&dictionary_value)) {
-    return base::nullopt;
+    return std::nullopt;
   }
   std::string function_body;
   if (!dictionary_value->GetString(kScriptKey, &function_body)) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   // Arguments are supposed to be an array where each element in the array is
@@ -44,12 +44,12 @@ base::Optional<Script> Script::FromValue(const base::Value* value) {
   // script execution harness will extract and convert the arguments.
   const base::Value* arguments_value;
   if (!dictionary_value->Get(kArgsKey, &arguments_value)) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   // Ensure this is a JSON list.
   if (!arguments_value->is_list()) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   std::string arguments;

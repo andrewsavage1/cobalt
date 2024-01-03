@@ -44,7 +44,7 @@ base::Optional<std::string> StorageArea::Key(int index) {
   Init();
 
   if (index < 0 || index >= length()) {
-    return base::nullopt;
+    return std::nullopt;
   }
   // Advance N elements to get to index.
   // TODO: If this is called often, we should cache the iterator.
@@ -64,7 +64,7 @@ base::Optional<std::string> StorageArea::GetItem(const std::string& key) {
   if (it != storage_map_->end()) {
     return it->second;
   } else {
-    return base::nullopt;
+    return std::nullopt;
   }
 }
 
@@ -103,7 +103,7 @@ void StorageArea::RemoveItem(const std::string& key) {
   size_bytes_ -= static_cast<int>(it->second.length());
   std::string old_value = it->second;
   storage_map_->erase(it);
-  storage_node_->DispatchEvent(key, old_value, base::nullopt);
+  storage_node_->DispatchEvent(key, old_value, std::nullopt);
   if (db_interface_) {
     db_interface_->Delete(origin_, key);
   }
@@ -114,7 +114,7 @@ void StorageArea::Clear() {
 
   storage_map_->clear();
   size_bytes_ = 0;
-  storage_node_->DispatchEvent(base::nullopt, base::nullopt, base::nullopt);
+  storage_node_->DispatchEvent(std::nullopt, std::nullopt, std::nullopt);
   if (db_interface_) {
     db_interface_->Clear(origin_);
   }

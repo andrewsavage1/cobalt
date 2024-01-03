@@ -381,7 +381,7 @@ base::Optional<int> InlineContainerBox::GetBidiLevel() const {
     return child_boxes().front()->GetBidiLevel();
   }
 
-  return base::nullopt;
+  return std::nullopt;
 }
 
 void InlineContainerBox::SetShouldCollapseLeadingWhiteSpace(

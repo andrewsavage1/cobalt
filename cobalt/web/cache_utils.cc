@@ -62,7 +62,7 @@ base::Optional<v8::Local<v8::Value>> BaseToV8(v8::Isolate* isolate,
 base::Optional<v8::Local<v8::Promise>> OptionalPromise(
     base::Optional<v8::Local<v8::Value>> value) {
   if (!value || !(*value)->IsPromise()) {
-    return base::nullopt;
+    return std::nullopt;
   }
   return value->As<v8::Promise>();
 }
@@ -80,7 +80,7 @@ std::string Stringify(v8::Isolate* isolate, v8::Local<v8::Value> value) {
 
 base::Optional<base::Value> Deserialize(const std::string& json) {
   if (json.empty()) {
-    return base::nullopt;
+    return std::nullopt;
   }
   return base::Value::FromUniquePtrValue(base::JSONReader::Read(json));
 }
@@ -93,7 +93,7 @@ base::Optional<base::Value> V8ToBase(v8::Isolate* isolate,
 template <typename T>
 base::Optional<v8::Local<T>> ToOptional(v8::MaybeLocal<T> value) {
   if (value.IsEmpty()) {
-    return base::nullopt;
+    return std::nullopt;
   }
   return value.ToLocalChecked();
 }
@@ -110,7 +110,7 @@ base::Optional<v8::Local<v8::Value>> GetInternal(v8::Local<v8::Value> object,
                                                  bool parent) {
   auto* isolate = GetIsolate(object);
   if (!isolate) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   base::Optional<v8::Local<v8::Value>> curr = object;
@@ -120,13 +120,13 @@ base::Optional<v8::Local<v8::Value>> GetInternal(v8::Local<v8::Value> object,
   int offset = parent ? -1 : 0;
   for (int i = 0; i < parts.size() + offset; i++) {
     if (!curr || !curr.value()->IsObject()) {
-      return base::nullopt;
+      return std::nullopt;
     }
     std::string part = parts[i];
     if (base::ContainsOnlyChars(part, "0123456789")) {
       uint32_t index;
       if (!base::StringToUint32(part, &index)) {
-        return base::nullopt;
+        return std::nullopt;
       }
       curr = ToOptional(curr->As<v8::Object>()->Get(context, index));
     } else {
@@ -179,7 +179,7 @@ struct V8Transforms {
   static base::Optional<double> ToDouble(v8::Isolate* isolate,
                                          v8::Local<v8::Value> value) {
     if (!value->IsNumber()) {
-      return base::nullopt;
+      return std::nullopt;
     }
     return value.As<v8::Number>()->Value();
   }
@@ -187,7 +187,7 @@ struct V8Transforms {
   static base::Optional<std::string> ToString(v8::Isolate* isolate,
                                               v8::Local<v8::Value> value) {
     if (!value->IsString()) {
-      return base::nullopt;
+      return std::nullopt;
     }
     auto v8_string = value.As<v8::String>();
     std::string result;
@@ -203,7 +203,7 @@ base::Optional<T> Get(v8::Local<v8::Value> object, const std::string& path,
                       V8Transform<T> transform) {
   auto value = GetInternal(object, path, /*parent=*/false);
   if (!value) {
-    return base::nullopt;
+    return std::nullopt;
   }
   return transform(GetIsolate(object), value.value());
 }
@@ -258,12 +258,12 @@ base::Optional<v8::Local<v8::Value>> Call(
     v8::Local<v8::Value> object, const std::string& path,
     std::initializer_list<v8::Local<v8::Value>> args) {
   if (!object->IsObject()) {
-    return base::nullopt;
+    return std::nullopt;
   }
   v8::Local<v8::Value> result;
   auto optional_function = cache_utils::Get(object, path);
   if (!optional_function || !optional_function.value()->IsFunction()) {
-    return base::nullopt;
+    return std::nullopt;
   }
   auto context_object =
       cache_utils::GetInternal(object, path, /*parent=*/true).value();
@@ -279,7 +279,7 @@ base::Optional<v8::Local<v8::Value>> Then(v8::Local<v8::Value> value,
                                           OnFullfilled on_fullfilled) {
   if (!value->IsPromise()) {
     on_fullfilled.Reset();
-    return base::nullopt;
+    return std::nullopt;
   }
   auto promise = value.As<v8::Promise>();
   auto* isolate = promise->GetIsolate();
@@ -321,7 +321,7 @@ base::Optional<v8::Local<v8::Value>> Then(v8::Local<v8::Value> value,
           .ToLocalChecked());
   if (resulting_promise.IsEmpty()) {
     delete on_fullfilled_ptr;
-    return base::nullopt;
+    return std::nullopt;
   }
   return resulting_promise.ToLocalChecked();
 }
@@ -392,7 +392,7 @@ base::Optional<v8::Local<v8::Value>> Evaluate(v8::Isolate* isolate,
   auto context = isolate->GetCurrentContext();
   auto script = v8::Script::Compile(context, V8String(isolate, js_code));
   if (script.IsEmpty()) {
-    return base::nullopt;
+    return std::nullopt;
   }
   return ToOptional(script.ToLocalChecked()->Run(context));
 }
@@ -402,7 +402,7 @@ base::Optional<v8::Local<v8::Value>> CreateInstance(
     std::initializer_list<v8::Local<v8::Value>> args) {
   auto constructor = Evaluate(isolate, class_name);
   if (!constructor) {
-    return base::nullopt;
+    return std::nullopt;
   }
   auto context = isolate->GetCurrentContext();
   std::vector<v8::Local<v8::Value>> argv = args;
@@ -441,7 +441,7 @@ base::Optional<v8::Local<v8::Value>> CreateResponse(
   auto status_text = options.FindKey("statusText");
   auto headers = options.FindKey("headers");
   if (body.size() == 0 || !status || !status_text || !headers) {
-    return base::nullopt;
+    return std::nullopt;
   }
   auto v8_body = v8::ArrayBuffer::New(isolate, body.size());
   memcpy(v8_body->GetBackingStore()->Data(), body.data(), body.size());
@@ -463,7 +463,7 @@ base::Optional<v8::Local<v8::Value>> CreateResponse(
 base::Optional<base::Value> ExtractResponseOptions(
     v8::Local<v8::Value> response) {
   if (!response->IsObject()) {
-    return base::nullopt;
+    return std::nullopt;
   }
   auto response_object = response.As<v8::Object>();
   auto* isolate = response_object->GetIsolate();
@@ -480,7 +480,7 @@ base::Optional<base::Value> ExtractResponseOptions(
                          ")()");
   Delete(global, "___tempResponseObject");
   if (!result) {
-    return base::nullopt;
+    return std::nullopt;
   }
   return V8ToBase(isolate, result.value());
 }

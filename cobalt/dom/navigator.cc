@@ -219,7 +219,7 @@ Navigator::TryGetSupportedCapabilities(
     const std::string& content_type = requested_media_capability.content_type();
     // 3.3. If content type is the empty string, return null.
     if (content_type.empty()) {
-      return base::nullopt;
+      return std::nullopt;
     }
     // 3.13. If the user agent and [CDM] implementation definitely support
     //       playback of encrypted media data for the combination of container,
@@ -232,7 +232,7 @@ Navigator::TryGetSupportedCapabilities(
   }
   // 4. If supported media capabilities is empty, return null.
   if (supported_media_capabilities.empty()) {
-    return base::nullopt;
+    return std::nullopt;
   }
   // 5. Return supported media capabilities.
   return supported_media_capabilities;
@@ -280,7 +280,7 @@ Navigator::TryGetSupportedConfiguration(
        candidate_configuration.video_capabilities().empty()) &&
       (!candidate_configuration.has_audio_capabilities() ||
        candidate_configuration.audio_capabilities().empty())) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   // 16. If the videoCapabilities member in candidate configuration is
@@ -295,7 +295,7 @@ Navigator::TryGetSupportedConfiguration(
             candidate_configuration.video_capabilities());
     // 16.2. If video capabilities is null, return NotSupported.
     if (!maybe_video_capabilities) {
-      return base::nullopt;
+      return std::nullopt;
     }
     // 16.3. Set the videoCapabilities member of accumulated configuration to
     //       video capabilities.
@@ -319,7 +319,7 @@ Navigator::TryGetSupportedConfiguration(
             candidate_configuration.audio_capabilities());
     // 17.2. If audio capabilities is null, return NotSupported.
     if (!maybe_audio_capabilities) {
-      return base::nullopt;
+      return std::nullopt;
     }
     // 17.3. Set the audioCapabilities member of accumulated configuration to
     //       audio capabilities.

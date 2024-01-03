@@ -219,7 +219,7 @@ TEST_F(CacheUtilsTest, ThenRejected) {
       promise,
       base::BindOnce(
           [](v8::Local<v8::Promise>) -> base::Optional<v8::Local<v8::Promise>> {
-            return base::nullopt;
+            return std::nullopt;
           }));
   auto promise_result =
       ExpectState(still_rejected_promise, v8::Promise::PromiseState::kRejected);

@@ -667,9 +667,9 @@ HardwareRasterizer::Impl::Impl(backend::GraphicsContext* graphics_context,
 
 HardwareRasterizer::Impl::~Impl() {
   graphics_context_->MakeCurrent();
-  textured_mesh_renderer_ = base::nullopt;
+  textured_mesh_renderer_ = std::nullopt;
 
-  scratch_surface_cache_ = base::nullopt;
+  scratch_surface_cache_ = std::nullopt;
   sk_output_surface_map_.clear();
   gr_context_.reset(NULL);
   graphics_context_->ReleaseCurrentContext();

@@ -251,7 +251,7 @@ util::CommandResult<protocol::ScriptResult> WindowDriver::Execute(
   CommandResult result = util::CallOnMessageLoop(
       window_task_runner_,
       base::Bind(&WindowDriver::ExecuteScriptInternal, base::Unretained(this),
-                 script, base::nullopt, &result_handler),
+                 script, std::nullopt, &result_handler),
       protocol::Response::kNoSuchWindow);
   if (result.is_success()) {
     return CommandResult(protocol::ScriptResult(result_handler.result()));

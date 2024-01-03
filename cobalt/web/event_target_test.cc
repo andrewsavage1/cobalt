@@ -78,7 +78,7 @@ base::Optional<bool> DispatchEventOnCurrentTarget(
         DOMException::kInvalidStateErr,
         base::polymorphic_downcast<DOMException*>(exception.get())->code());
   }
-  return base::nullopt;
+  return std::nullopt;
 }
 
 TEST_F(EventTargetTest, SingleEventListenerFired) {

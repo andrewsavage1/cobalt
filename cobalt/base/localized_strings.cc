@@ -37,7 +37,7 @@ base::Optional<base::FilePath> GetFilenameForLanguage(
       SbSystemGetPath(kSbSystemPathContentDirectory, buffer, kBufferSize);
   if (!got_path) {
     DLOG(ERROR) << "Cannot get content path for i18n files.";
-    return base::nullopt;
+    return std::nullopt;
   }
 
   return base::FilePath(buffer).Append("i18n").Append(language).AddExtension(

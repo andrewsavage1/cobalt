@@ -47,7 +47,7 @@ void SmoothedValue::SetTarget(double target, const base::TimeTicks& time) {
 }
 
 void SmoothedValue::SnapToTarget() {
-  previous_value_ = base::nullopt;
+  previous_value_ = std::nullopt;
   previous_derivative_ = 0;
 }
 

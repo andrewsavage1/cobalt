@@ -300,7 +300,7 @@ script::HandlePromiseVoid Cache::Put(
                 cache_utils::ToV8Value(response_reference->referenced_value()));
             if (!options) {
               promise_reference->value().Reject();
-              return base::nullopt;
+              return std::nullopt;
             }
             base::DictionaryValue metadata;
             metadata.SetKey("url", base::Value(url));
@@ -310,7 +310,7 @@ script::HandlePromiseVoid Cache::Put(
                 cache_utils::ToUint8Vector(array_buffer_promise->Result()),
                 std::move(metadata));
             promise_reference->value().Resolve();
-            return base::nullopt;
+            return std::nullopt;
           },
           environment_settings, std::move(request_reference),
           std::move(response_reference), std::move(promise_reference)));

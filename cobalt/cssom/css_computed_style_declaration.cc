@@ -47,7 +47,7 @@ unsigned int CSSComputedStyleDeclaration::length() const {
 //   https://www.w3.org/TR/cssom/#dom-cssstyledeclaration-item
 base::Optional<std::string> CSSComputedStyleDeclaration::Item(
     unsigned int index) const {
-  if (index >= length()) return base::nullopt;
+  if (index >= length()) return std::nullopt;
   return base::Optional<std::string>(
       GetPropertyName(GetLexicographicalLonghandPropertyKey(index)));
 }

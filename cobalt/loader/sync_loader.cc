@@ -102,7 +102,7 @@ class FetcherToDecoderAdapter : public Fetcher::Handler {
     DCHECK(fetcher);
     decoder_->SetLastURLOrigin(fetcher->last_url_origin());
     decoder_->Finish();
-    loader_on_thread_->SignalLoadComplete(base::nullopt);
+    loader_on_thread_->SignalLoadComplete(std::nullopt);
   }
   void OnError(Fetcher* fetcher, const std::string& error) override {
     loader_on_thread_->SignalLoadComplete(error);

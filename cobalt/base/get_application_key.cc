@@ -43,7 +43,7 @@ GURL GetApplicationOrigin(const GURL& url) {
 
 Optional<std::string> GetApplicationKey(const GURL& url) {
   if (!url.is_valid()) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   std::string raw_url = GetApplicationOrigin(url).spec();

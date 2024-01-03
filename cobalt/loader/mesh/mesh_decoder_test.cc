@@ -131,7 +131,7 @@ std::vector<uint8> GetMeshData(const base::FilePath& file_path) {
 // Test that we can decode a mesh received in one chunk.
 TEST(MeshDecoderTest, DecodeMesh) {
   MockMeshDecoder mesh_decoder;
-  mesh_decoder.ExpectCallWithError(base::nullopt);
+  mesh_decoder.ExpectCallWithError(std::nullopt);
 
   std::vector<uint8> mesh_data = GetMeshData(GetTestMeshPath(kTestMeshbox));
   mesh_decoder.DecodeChunk(reinterpret_cast<char*>(&mesh_data[0]),
@@ -172,7 +172,7 @@ TEST(MeshDecoderTest, DecodeMesh) {
 // Test that we can decode a mesh received in multiple chunks.
 TEST(MeshDecoderTest, DecodeMeshWithMultipleChunks) {
   MockMeshDecoder mesh_decoder;
-  mesh_decoder.ExpectCallWithError(base::nullopt);
+  mesh_decoder.ExpectCallWithError(std::nullopt);
 
   std::vector<uint8> mesh_data = GetMeshData(GetTestMeshPath(kTestMeshbox));
   mesh_decoder.DecodeChunk(reinterpret_cast<char*>(&mesh_data[0]), 4);

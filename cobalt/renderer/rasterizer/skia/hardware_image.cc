@@ -260,7 +260,7 @@ class HardwareFrontendImage::HardwareBackendImage {
 
 namespace {
 // Given a ImageDataDescriptor, returns a AlternateRgbaFormat value for it,
-// which for most formats will be base::nullopt, but for those that piggy-back
+// which for most formats will be std::nullopt, but for those that piggy-back
 // on RGBA but assign different meanings to each of the 4 pixels, this will
 // return a special formatting option.
 base::Optional<AlternateRgbaFormat> AlternateRgbaFormatFromImageDataDescriptor(
@@ -268,7 +268,7 @@ base::Optional<AlternateRgbaFormat> AlternateRgbaFormatFromImageDataDescriptor(
   if (descriptor.pixel_format == render_tree::kPixelFormatUYVY) {
     return AlternateRgbaFormat_UYVY;
   } else {
-    return base::nullopt;
+    return std::nullopt;
   }
 }
 

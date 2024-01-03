@@ -51,7 +51,7 @@ class MeshProjection : public base::RefCountedThreadSafe<MeshProjection> {
   };
 
   MeshProjection(MeshCollectionList mesh_collections,
-                 base::Optional<uint32> crc = base::nullopt)
+                 base::Optional<uint32> crc = std::nullopt)
       : mesh_collections_(std::move(mesh_collections)), crc_(crc) {
     DCHECK_GT(mesh_collections_.size(), 0UL);
     DCHECK_LE(mesh_collections_.size(), 2UL);

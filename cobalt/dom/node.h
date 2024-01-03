@@ -133,12 +133,12 @@ class Node : public web::EventTarget {
   Node* previous_sibling() const { return previous_sibling_; }
 
   virtual base::Optional<std::string> node_value() const {
-    return base::nullopt;
+    return std::nullopt;
   }
   virtual void set_node_value(const base::Optional<std::string>& node_value) {}
 
   virtual base::Optional<std::string> text_content() const {
-    return base::nullopt;
+    return std::nullopt;
   }
   virtual void set_text_content(
       const base::Optional<std::string>& text_content) {}

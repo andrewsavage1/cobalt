@@ -23,7 +23,7 @@ TEST(AnimationDataTests, LocalTimeIsUnresolvedIfTimelineTimeIsUnresolved) {
   Animation::Data animation;
   animation.set_start_time(base::TimeDelta::FromSeconds(2));
   base::Optional<base::TimeDelta> local_time =
-      animation.ComputeLocalTimeFromTimelineTime(base::nullopt);
+      animation.ComputeLocalTimeFromTimelineTime(std::nullopt);
 
   EXPECT_FALSE(local_time);
 }

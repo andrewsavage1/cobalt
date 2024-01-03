@@ -168,7 +168,7 @@ bool Box::ValidateUpdateSizeInputs(const LayoutParams& params) {
 }
 
 void Box::InvalidateUpdateSizeInputsOfBox() {
-  last_update_size_params_ = base::nullopt;
+  last_update_size_params_ = std::nullopt;
 }
 
 void Box::InvalidateUpdateSizeInputsOfBoxAndAncestors() {
@@ -370,7 +370,7 @@ void Box::InvalidateCrossReferencesOfBoxAndAncestors() {
 }
 
 void Box::InvalidateRenderTreeNodesOfBoxAndAncestors() {
-  cached_render_tree_node_info_ = base::nullopt;
+  cached_render_tree_node_info_ = std::nullopt;
   if (parent_) {
     parent_->InvalidateRenderTreeNodesOfBoxAndAncestors();
   }
@@ -1446,7 +1446,7 @@ void SetupFilterNodeFromStyle(
   } else {
     // If opacity is 1, then no opacity filter should be applied, so the
     // source render tree should appear fully opaque.
-    filter_node_builder->opacity_filter = base::nullopt;
+    filter_node_builder->opacity_filter = std::nullopt;
   }
 }
 

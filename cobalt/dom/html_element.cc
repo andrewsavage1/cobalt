@@ -1226,7 +1226,7 @@ void HTMLElement::InvalidateLayoutBoxes() {
       pseudo_element->reset_layout_boxes();
     }
   }
-  directionality_ = base::nullopt;
+  directionality_ = std::nullopt;
 }
 
 void HTMLElement::OnUiNavBlur(SbTimeMonotonic time) {
@@ -1558,7 +1558,7 @@ void HTMLElement::SetTabIndex(const std::string& value) {
   if (base::StringToInt32(value, &tabindex)) {
     tabindex_ = tabindex;
   } else {
-    tabindex_ = base::nullopt;
+    tabindex_ = std::nullopt;
   }
 
   // Changing the tabindex may trigger a UI navigation change.
@@ -1577,7 +1577,7 @@ void HTMLElement::SetUiNavFocusDuration(const std::string& value) {
       ui_nav_item_->SetFocusDuration(*ui_nav_focus_duration_);
     }
   } else {
-    ui_nav_focus_duration_ = base::nullopt;
+    ui_nav_focus_duration_ = std::nullopt;
     if (ui_nav_item_) {
       ui_nav_item_->SetFocusDuration(0.0f);
     }

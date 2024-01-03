@@ -61,12 +61,12 @@ base::Optional<int> DebugConsoleModeStringToInt(
   } else {
     DLOG(WARNING) << "Debug console mode \"" << mode_string
                   << "\" not recognized.";
-    return base::nullopt;
+    return std::nullopt;
   }
 }
 
 // Returns the debug console mode as specified by the command line.
-// If unspecified by the command line, base::nullopt is returned.
+// If unspecified by the command line, std::nullopt is returned.
 base::Optional<int> GetDebugConsoleModeFromCommandLine() {
 #if defined(ENABLE_DEBUG_COMMAND_LINE_SWITCHES)
   base::CommandLine* command_line = base::CommandLine::ForCurrentProcess();
@@ -77,7 +77,7 @@ base::Optional<int> GetDebugConsoleModeFromCommandLine() {
   }
 #endif  // ENABLE_DEBUG_COMMAND_LINE_SWITCHES
 
-  return base::nullopt;
+  return std::nullopt;
 }
 
 // Returns the debug console's initial visibility mode.

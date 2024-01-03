@@ -344,7 +344,7 @@ TEST(ImageDecoderTest, DecodePNGImage) {
   std::unique_ptr<FakeResourceProviderStub> resource_provider(
       new FakeResourceProviderStub());
   MockImageDecoder image_decoder(resource_provider.get());
-  image_decoder.ExpectCallWithError(base::nullopt);
+  image_decoder.ExpectCallWithError(std::nullopt);
 
   std::vector<uint8> image_data =
       GetImageData(GetTestImagePath("non_interlaced_png.png"));
@@ -380,7 +380,7 @@ TEST(ImageDecoderTest, DecodePNGImageWithMultipleChunks) {
   std::unique_ptr<FakeResourceProviderStub> resource_provider(
       new FakeResourceProviderStub());
   MockImageDecoder image_decoder(resource_provider.get());
-  image_decoder.ExpectCallWithError(base::nullopt);
+  image_decoder.ExpectCallWithError(std::nullopt);
 
   std::vector<uint8> image_data =
       GetImageData(GetTestImagePath("non_interlaced_png.png"));
@@ -420,7 +420,7 @@ TEST(ImageDecoderTest, DecodeInterlacedPNGImage) {
   std::unique_ptr<FakeResourceProviderStub> resource_provider(
       new FakeResourceProviderStub());
   MockImageDecoder image_decoder(resource_provider.get());
-  image_decoder.ExpectCallWithError(base::nullopt);
+  image_decoder.ExpectCallWithError(std::nullopt);
 
   std::vector<uint8> image_data =
       GetImageData(GetTestImagePath("interlaced_png.png"));
@@ -456,7 +456,7 @@ TEST(ImageDecoderTest, DecodeInterlacedPNGImageWithMultipleChunks) {
   std::unique_ptr<FakeResourceProviderStub> resource_provider(
       new FakeResourceProviderStub());
   MockImageDecoder image_decoder(resource_provider.get());
-  image_decoder.ExpectCallWithError(base::nullopt);
+  image_decoder.ExpectCallWithError(std::nullopt);
 
   std::vector<uint8> image_data =
       GetImageData(GetTestImagePath("interlaced_png.png"));
@@ -496,7 +496,7 @@ TEST(ImageDecoderTest, DecodeJPEGImage) {
   std::unique_ptr<FakeResourceProviderStub> resource_provider(
       new FakeResourceProviderStub());
   MockImageDecoder image_decoder(resource_provider.get());
-  image_decoder.ExpectCallWithError(base::nullopt);
+  image_decoder.ExpectCallWithError(std::nullopt);
 
   std::vector<uint8> image_data =
       GetImageData(GetTestImagePath("baseline_jpeg.jpg"));
@@ -524,7 +524,7 @@ TEST(ImageDecoderTest, DecodeJPEGImageWithMultipleChunks) {
   std::unique_ptr<FakeResourceProviderStub> resource_provider(
       new FakeResourceProviderStub());
   MockImageDecoder image_decoder(resource_provider.get());
-  image_decoder.ExpectCallWithError(base::nullopt);
+  image_decoder.ExpectCallWithError(std::nullopt);
 
   std::vector<uint8> image_data =
       GetImageData(GetTestImagePath("baseline_jpeg.jpg"));
@@ -556,7 +556,7 @@ TEST(ImageDecoderTest, DecodeProgressiveJPEGImage) {
   std::unique_ptr<FakeResourceProviderStub> resource_provider(
       new FakeResourceProviderStub());
   MockImageDecoder image_decoder(resource_provider.get());
-  image_decoder.ExpectCallWithError(base::nullopt);
+  image_decoder.ExpectCallWithError(std::nullopt);
 
   std::vector<uint8> image_data =
       GetImageData(GetTestImagePath("progressive_jpeg.jpg"));
@@ -585,7 +585,7 @@ TEST(ImageDecoderTest, DecodeProgressiveJPEGImageWithMultipleChunks) {
   std::unique_ptr<FakeResourceProviderStub> resource_provider(
       new FakeResourceProviderStub());
   MockImageDecoder image_decoder(resource_provider.get());
-  image_decoder.ExpectCallWithError(base::nullopt);
+  image_decoder.ExpectCallWithError(std::nullopt);
 
   std::vector<uint8> image_data =
       GetImageData(GetTestImagePath("progressive_jpeg.jpg"));
@@ -686,7 +686,7 @@ TEST(ImageDecoderTest, DecodeWEBPImage) {
   std::unique_ptr<FakeResourceProviderStub> resource_provider(
       new FakeResourceProviderStub());
   MockImageDecoder image_decoder(resource_provider.get());
-  image_decoder.ExpectCallWithError(base::nullopt);
+  image_decoder.ExpectCallWithError(std::nullopt);
 
   std::vector<uint8> image_data =
       GetImageData(GetTestImagePath("webp_image.webp"));
@@ -721,7 +721,7 @@ TEST(ImageDecoderTest, DecodeWEBPImageWithMultipleChunks) {
   std::unique_ptr<FakeResourceProviderStub> resource_provider(
       new FakeResourceProviderStub());
   MockImageDecoder image_decoder(resource_provider.get());
-  image_decoder.ExpectCallWithError(base::nullopt);
+  image_decoder.ExpectCallWithError(std::nullopt);
 
   std::vector<uint8> image_data =
       GetImageData(GetTestImagePath("webp_image.webp"));
@@ -762,7 +762,7 @@ TEST(ImageDecoderTest, DecodeAnimatedWEBPImage) {
   std::unique_ptr<FakeResourceProviderStub> resource_provider(
       new FakeResourceProviderStub());
   MockImageDecoder image_decoder(resource_provider.get());
-  image_decoder.ExpectCallWithError(base::nullopt);
+  image_decoder.ExpectCallWithError(std::nullopt);
 
   std::vector<uint8> image_data =
       GetImageData(GetTestImagePath("vsauce_sm.webp"));
@@ -793,7 +793,7 @@ TEST(ImageDecoderTest, DecodeAnimatedWEBPImageWithMultipleChunks) {
   std::unique_ptr<FakeResourceProviderStub> resource_provider(
       new FakeResourceProviderStub());
   MockImageDecoder image_decoder(resource_provider.get());
-  image_decoder.ExpectCallWithError(base::nullopt);
+  image_decoder.ExpectCallWithError(std::nullopt);
 
   std::vector<uint8> image_data =
       GetImageData(GetTestImagePath("vsauce_sm.webp"));

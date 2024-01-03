@@ -75,7 +75,7 @@ base::Optional<net::IPEndPoint> GetLocalIpAddress() {
   if (!SbSocketGetInterfaceAddress(&destination, &local_ip, NULL) ||
       !ip_addr.FromSbSocketAddress(&local_ip)) {
     DLOG(WARNING) << "Unable to get a local interface address.";
-    return base::nullopt;
+    return std::nullopt;
   }
 
   return ip_addr;

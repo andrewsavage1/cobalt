@@ -1218,7 +1218,7 @@ void UsedBorderRadiusProvider::VisitLength(cssom::LengthValue* length) {
   if (length->value() > 0) {
     rounded_corner_.emplace(length->value(), length->value());
   } else {
-    rounded_corner_ = base::nullopt;
+    rounded_corner_ = std::nullopt;
   }
 }
 
@@ -1228,7 +1228,7 @@ void UsedBorderRadiusProvider::VisitPercentage(
     rounded_corner_.emplace(percentage->value() * frame_size_.width(),
                             percentage->value() * frame_size_.height());
   } else {
-    rounded_corner_ = base::nullopt;
+    rounded_corner_ = std::nullopt;
   }
 }
 

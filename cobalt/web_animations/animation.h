@@ -120,11 +120,11 @@ class Animation : public script::Wrappable {
   base::Optional<double> start_time() const {
     return data_.start_time()
                ? base::Optional<double>(data_.start_time()->InMillisecondsF())
-               : base::nullopt;
+               : std::nullopt;
   }
   void set_start_time(const base::Optional<double>& start_time) {
     if (!start_time) {
-      data_.set_start_time(base::nullopt);
+      data_.set_start_time(std::nullopt);
     } else {
       data_.set_start_time(base::TimeDelta::FromMillisecondsD(*start_time));
     }

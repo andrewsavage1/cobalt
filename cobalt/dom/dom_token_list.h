@@ -42,7 +42,7 @@ class DOMTokenList : public script::Wrappable {
   void Add(const std::vector<std::string>& tokens);
   void Remove(const std::vector<std::string>& tokens);
   bool Toggle(const std::string& token,
-              const base::Optional<bool>& force = base::nullopt);
+              const base::Optional<bool>& force = std::nullopt);
   std::string AnonymousStringifier() const;
 
   // Custom, not in any spec.

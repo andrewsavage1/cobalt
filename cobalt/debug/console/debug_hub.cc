@@ -52,7 +52,7 @@ debug::console::DebugConsoleMode DebugHub::GetDebugConsoleMode() const {
 }
 
 void DebugHub::Attach(const AttachCallbackArg& callback) {
-  last_error_ = base::nullopt;
+  last_error_ = std::nullopt;
   debug_client_ = create_debug_client_callback_.Run(this);
 
   // |debug_client_| may be NULL if the WebModule is not available at this time.
@@ -66,7 +66,7 @@ void DebugHub::Attach(const AttachCallbackArg& callback) {
 }
 
 void DebugHub::Detach(const AttachCallbackArg& callback) {
-  last_error_ = base::nullopt;
+  last_error_ = std::nullopt;
   debug_client_.reset();
   AttachCallbackArg::Reference callback_reference(this, callback);
   callback_reference.value().Run();
@@ -90,7 +90,7 @@ std::string DebugHub::ReadDebugContentText(const std::string& filename) {
 void DebugHub::SendCommand(const std::string& method,
                            const std::string& json_params,
                            const ResponseCallbackArg& callback) {
-  last_error_ = base::nullopt;
+  last_error_ = std::nullopt;
   if (!debug_client_ || !debug_client_->IsAttached()) {
     std::unique_ptr<base::DictionaryValue> response(new base::DictionaryValue);
     response->SetString("error.message", "Debugger is not connected.");

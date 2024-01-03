@@ -418,7 +418,7 @@ inline void FromJSValue(v8::Isolate* isolate, v8::Local<v8::Value> value,
                         int conversion_flags, ExceptionState* exception_state,
                         base::Optional<T>* out_optional) {
   if (value->IsNullOrUndefined()) {
-    *out_optional = base::nullopt;
+    *out_optional = std::nullopt;
   } else {
     *out_optional = T();
     FromJSValue(isolate, value, conversion_flags & ~kConversionFlagNullable,
@@ -432,12 +432,12 @@ inline void FromJSValue(v8::Isolate* isolate, v8::Local<v8::Value> value,
                         int conversion_flags, ExceptionState* exception_state,
                         base::Optional<std::string>* out_optional) {
   if (value->IsNull()) {
-    *out_optional = base::nullopt;
+    *out_optional = std::nullopt;
   } else if (value->IsUndefined() &&
              !(conversion_flags & kConversionFlagTreatUndefinedAsEmptyString)) {
     // If TreatUndefinedAs=EmptyString is set, skip the default conversion
     // of undefined to null.
-    *out_optional = base::nullopt;
+    *out_optional = std::nullopt;
   } else {
     *out_optional = std::string();
     FromJSValue(isolate, value, conversion_flags & ~kConversionFlagNullable,

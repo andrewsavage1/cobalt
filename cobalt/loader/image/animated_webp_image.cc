@@ -368,7 +368,7 @@ bool AnimatedWebPImage::AdvanceFrame() {
     // Check if we have finished looping, and if so return indicating that there
     // is no additional frame available.
     if (LoopingFinished()) {
-      next_frame_time_ = base::nullopt;
+      next_frame_time_ = std::nullopt;
       return false;
     }
 

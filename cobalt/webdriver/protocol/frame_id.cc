@@ -41,10 +41,10 @@ base::Optional<FrameId> FrameId::FromValue(const base::Value* value) {
       case base::Value::Type::DOUBLE:
       case base::Value::Type::LIST:
         // Malformed parameter.
-        return base::nullopt;
+        return std::nullopt;
     }
   }
-  return base::nullopt;
+  return std::nullopt;
 }
 
 }  // namespace protocol

@@ -155,7 +155,7 @@ std::unique_ptr<base::Value> Capabilities::ToValue(
 base::Optional<Capabilities> Capabilities::FromValue(const base::Value* value) {
   const base::DictionaryValue* value_as_dictionary;
   if (!value->GetAsDictionary(&value_as_dictionary)) {
-    return base::nullopt;
+    return std::nullopt;
   }
   // Create a new Capabilities object, and copy the capabilities dictionary
   // from which we will read capabilities
@@ -216,7 +216,7 @@ base::Optional<RequestedCapabilities> RequestedCapabilities::FromValue(
   DCHECK(value);
   const base::DictionaryValue* requested_capabilities_value;
   if (!value->GetAsDictionary(&requested_capabilities_value)) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   base::Optional<Capabilities> desired;
@@ -227,7 +227,7 @@ base::Optional<RequestedCapabilities> RequestedCapabilities::FromValue(
   }
   if (!desired) {
     // Desired capabilities are required.
-    return base::nullopt;
+    return std::nullopt;
   }
   base::Optional<Capabilities> required;
   if (requested_capabilities_value->Get(kRequiredCapabilitiesKey,

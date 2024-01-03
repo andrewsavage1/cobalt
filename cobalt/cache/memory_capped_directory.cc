@@ -137,7 +137,7 @@ std::vector<uint32_t> MemoryCappedDirectory::KeysWithMetadata() {
 base::Optional<base::Value> MemoryCappedDirectory::Metadata(uint32_t key) {
   auto metadata_path = GetFilePath(key).AddExtension(kMetadataExtension);
   if (!base::PathExists(metadata_path)) {
-    return base::nullopt;
+    return std::nullopt;
   }
   std::string serialized_metadata;
   base::ReadFileToString(metadata_path, &serialized_metadata);

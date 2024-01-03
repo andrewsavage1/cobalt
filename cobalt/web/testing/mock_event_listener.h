@@ -121,7 +121,7 @@ class MockEventListener : public EventListener {
                                         const scoped_refptr<Event>&,
                                         bool* had_exception) {
     *had_exception = false;
-    return base::nullopt;
+    return std::nullopt;
   }
 
   static base::Optional<bool> StopPropagation(
@@ -129,7 +129,7 @@ class MockEventListener : public EventListener {
       const scoped_refptr<Event>& event, bool* had_exception) {
     *had_exception = false;
     event->StopPropagation();
-    return base::nullopt;
+    return std::nullopt;
   }
 
   static base::Optional<bool> StopImmediatePropagation(
@@ -137,7 +137,7 @@ class MockEventListener : public EventListener {
       const scoped_refptr<Event>& event, bool* had_exception) {
     *had_exception = false;
     event->StopImmediatePropagation();
-    return base::nullopt;
+    return std::nullopt;
   }
 
   static base::Optional<bool> PreventDefault(
@@ -145,7 +145,7 @@ class MockEventListener : public EventListener {
       const scoped_refptr<Event>& event, bool* had_exception) {
     *had_exception = false;
     event->PreventDefault();
-    return base::nullopt;
+    return std::nullopt;
   }
 
   virtual ~MockEventListener() {}

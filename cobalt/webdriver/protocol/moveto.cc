@@ -46,7 +46,7 @@ std::unique_ptr<base::Value> Moveto::ToValue(const Moveto& moveto) {
 base::Optional<Moveto> Moveto::FromValue(const base::Value* value) {
   const base::DictionaryValue* dictionary_value = nullptr;
   if (!value->GetAsDictionary(&dictionary_value)) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   base::Optional<ElementId> element;

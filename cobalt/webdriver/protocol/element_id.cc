@@ -32,11 +32,11 @@ std::unique_ptr<base::Value> ElementId::ToValue(const ElementId& element_id) {
 base::Optional<ElementId> ElementId::FromValue(const base::Value* value) {
   const base::DictionaryValue* dictionary_value;
   if (!value->GetAsDictionary(&dictionary_value)) {
-    return base::nullopt;
+    return std::nullopt;
   }
   std::string element_id;
   if (!dictionary_value->GetString(kElementKey, &element_id)) {
-    return base::nullopt;
+    return std::nullopt;
   }
   return ElementId(element_id);
 }

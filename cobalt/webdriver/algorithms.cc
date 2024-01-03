@@ -208,7 +208,7 @@ base::Optional<std::string> GetComputedStyle(dom::Element* element,
       return property_value->ToString();
     }
   }
-  return base::nullopt;
+  return std::nullopt;
 }
 
 // https://www.w3.org/TR/webdriver/#text.blocklevel

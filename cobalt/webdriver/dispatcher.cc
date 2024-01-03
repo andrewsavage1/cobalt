@@ -59,7 +59,7 @@ class CommandResultHandlerImpl
       response_handler_->SuccessData(content_type, data, len);
     } else {
       std::unique_ptr<base::Value> response =
-          protocol::Response::CreateResponse(base::nullopt, status_code, NULL);
+          protocol::Response::CreateResponse(std::nullopt, status_code, NULL);
       response_handler_->FailedCommand(std::move(response));
     }
   }

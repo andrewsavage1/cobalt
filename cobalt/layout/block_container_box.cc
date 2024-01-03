@@ -56,7 +56,7 @@ void BlockContainerBox::UpdateContentWidthAndMargins(
       forced_level = kInlineLevel;
       // Break circular dependency if needed.
       if (width_depends_on_containing_block) {
-        maybe_nulled_width = base::nullopt;
+        maybe_nulled_width = std::nullopt;
       }
     }
 
@@ -151,7 +151,7 @@ void BlockContainerBox::UpdateContentHeightAndMargins(
         margin_top() + border_top_width() + padding_top() +
         *formatting_context->maybe_baseline_offset_from_top_content_edge();
   } else {
-    maybe_baseline_offset_from_top_margin_edge_ = base::nullopt;
+    maybe_baseline_offset_from_top_margin_edge_ = std::nullopt;
   }
 }
 
