@@ -25,7 +25,7 @@ namespace {
 // access, which means we cannot access our |LogMessageHandler| instance,
 // nor even call |base::MessageLoop::current|.
 bool DoesThreadAllowSingletons() {
-  return ThreadRestrictions::GetSingletonAllowed();
+  return base::GetSingletonAllowed();
 }
 }  // namespace
 

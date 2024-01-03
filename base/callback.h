@@ -4,8 +4,10 @@
 #include "base/functional/callback.h"
 
 namespace base {
-template <typename R, typename... Args>
-using Callback = RepeatingCallback<R(Args...)>;
+template <typename Signature>
+using Callback = RepeatingCallback<Signature>;
+
+using Closure = Callback<void()>;
 }
 
 #endif

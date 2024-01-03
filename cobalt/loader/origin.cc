@@ -24,9 +24,9 @@ bool Origin::Tuple::operator==(const Tuple& rhs) const {
 // static
 base::Optional<Origin::Tuple> Origin::GetTupleFromURL(
     const GURL& url, bool recurse_into_blob_paths) {
-  if (!url.is_valid()) return base::nullopt;
-  if (!url.has_scheme()) return base::nullopt;
-  if (!url.has_host() && !url.SchemeIs("file")) return base::nullopt;
+  if (!url.is_valid()) return std::nullopt;
+  if (!url.has_scheme()) return std::nullopt;
+  if (!url.has_host() && !url.SchemeIs("file")) return std::nullopt;
 
   if (url.SchemeIs("blob") && recurse_into_blob_paths) {
     // In the case of blobs, recurse into their path to determine the origin
@@ -36,7 +36,7 @@ base::Optional<Origin::Tuple> Origin::GetTupleFromURL(
 
   if (!url.SchemeIs("https") && !url.SchemeIs("http") && !url.SchemeIs("ftp") &&
       !url.SchemeIs("ws") && !url.SchemeIs("wss") && !url.SchemeIs("file")) {
-    return base::nullopt;
+    return std::nullopt;
   }
 
   return Origin::Tuple{url.scheme(), url.host(),
