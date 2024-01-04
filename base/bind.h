@@ -1,5 +1,5 @@
-#ifndef BASE_OPTIONAL_H_
-#define BASE_OPTIONAL_H_
+#ifndef BASE_BIND_H_
+#define BASE_BIND_H_
 
 #include <utility>
 
