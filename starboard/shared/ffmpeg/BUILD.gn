@@ -112,8 +112,7 @@ if (!use_cobalt_customizations) {
     configs += [ "//starboard/build/config:starboard_implementation" ]
     deps = [
       ":ffmpeg_dispatch_sources",
-
-      # "//cobalt/test:run_all_unittests",
+      "//cobalt/test:run_all_unittests",
       "//starboard:starboard_group",
       "//starboard/common",
       "//testing/gmock",

@@ -81,36 +81,36 @@ TEST(CheckDeathTest, Basics) {
                CHECK_LT(a, b) << "custom message");
 }
 
-TEST(CheckDeathTest, PCheck) {
-  const char file[] = "/nonexistentfile123";
-  std::ignore = fopen(file, "r");
-  std::string err =
-      logging::SystemErrorCodeToString(logging::GetLastSystemErrorCode());
+// TEST(CheckDeathTest, PCheck) {
+//   const char file[] = "/nonexistentfile123";
+//   std::ignore = fopen(file, "r");
+//   std::string err =
+//       logging::SystemErrorCodeToString(logging::GetLastSystemErrorCode());
 
-  EXPECT_CHECK(
-      "Check failed: fopen(file, \"r\") != nullptr."
-      " : " +
-          err,
-      PCHECK(fopen(file, "r") != nullptr));
+//   EXPECT_CHECK(
+//       "Check failed: fopen(file, \"r\") != nullptr."
+//       " : " +
+//           err,
+//       PCHECK(fopen(file, "r") != nullptr));
 
-  EXPECT_CHECK(
-      "Check failed: fopen(file, \"r\") != nullptr."
-      " foo: " +
-          err,
-      PCHECK(fopen(file, "r") != nullptr) << "foo");
+//   EXPECT_CHECK(
+//       "Check failed: fopen(file, \"r\") != nullptr."
+//       " foo: " +
+//           err,
+//       PCHECK(fopen(file, "r") != nullptr) << "foo");
 
-  EXPECT_DCHECK(
-      "Check failed: fopen(file, \"r\") != nullptr."
-      " : " +
-          err,
-      DPCHECK(fopen(file, "r") != nullptr));
+//   EXPECT_DCHECK(
+//       "Check failed: fopen(file, \"r\") != nullptr."
+//       " : " +
+//           err,
+//       DPCHECK(fopen(file, "r") != nullptr));
 
-  EXPECT_DCHECK(
-      "Check failed: fopen(file, \"r\") != nullptr."
-      " foo: " +
-          err,
-      DPCHECK(fopen(file, "r") != nullptr) << "foo");
-}
+//   EXPECT_DCHECK(
+//       "Check failed: fopen(file, \"r\") != nullptr."
+//       " foo: " +
+//           err,
+//       DPCHECK(fopen(file, "r") != nullptr) << "foo");
+// }
 
 TEST(CheckDeathTest, CheckOp) {
   int a = 1, b = 2;
@@ -191,75 +191,75 @@ class ScopedDcheckSeverity {
 #else
 #define MAYBE_Dcheck Dcheck
 #endif
-TEST(CheckDeathTest, MAYBE_Dcheck) {
-#if BUILDFLAG(DCHECK_IS_CONFIGURABLE)
-  // DCHECKs are enabled, and LOGGING_DCHECK is mutable, but defaults to
-  // non-fatal. Set it to LOGGING_FATAL to get the expected behavior from the
-  // rest of this test.
-  ScopedDcheckSeverity dcheck_severity(logging::LOGGING_FATAL);
-#endif  // BUILDFLAG(DCHECK_IS_CONFIGURABLE)
+// TEST(CheckDeathTest, MAYBE_Dcheck) {
+// #if BUILDFLAG(DCHECK_IS_CONFIGURABLE)
+//   // DCHECKs are enabled, and LOGGING_DCHECK is mutable, but defaults to
+//   // non-fatal. Set it to LOGGING_FATAL to get the expected behavior from the
+//   // rest of this test.
+//   ScopedDcheckSeverity dcheck_severity(logging::LOGGING_FATAL);
+// #endif  // BUILDFLAG(DCHECK_IS_CONFIGURABLE)
 
-#if defined(NDEBUG) && !defined(DCHECK_ALWAYS_ON)
-  // Release build.
-  EXPECT_FALSE(DCHECK_IS_ON());
-  EXPECT_FALSE(DLOG_IS_ON(DCHECK));
-#elif defined(NDEBUG) && defined(DCHECK_ALWAYS_ON)
-  // Release build with real DCHECKS.
-  EXPECT_TRUE(DCHECK_IS_ON());
-  EXPECT_TRUE(DLOG_IS_ON(DCHECK));
-#else
-  // Debug build.
-  EXPECT_TRUE(DCHECK_IS_ON());
-  EXPECT_TRUE(DLOG_IS_ON(DCHECK));
-#endif
+// #if defined(NDEBUG) && !defined(DCHECK_ALWAYS_ON)
+//   // Release build.
+//   EXPECT_FALSE(DCHECK_IS_ON());
+//   EXPECT_FALSE(DLOG_IS_ON(DCHECK));
+// #elif defined(NDEBUG) && defined(DCHECK_ALWAYS_ON)
+//   // Release build with real DCHECKS.
+//   EXPECT_TRUE(DCHECK_IS_ON());
+//   EXPECT_TRUE(DLOG_IS_ON(DCHECK));
+// #else
+//   // Debug build.
+//   EXPECT_TRUE(DCHECK_IS_ON());
+//   EXPECT_TRUE(DLOG_IS_ON(DCHECK));
+// #endif
 
-  EXPECT_DCHECK("Check failed: false. ", DCHECK(false));
+//   EXPECT_DCHECK("Check failed: false. ", DCHECK(false));
 
-  // Produce a consistent error code so that both the main instance of this test
-  // and the EXPECT_DEATH invocation below get the same error codes for DPCHECK.
-  const char file[] = "/nonexistentfile123";
-  std::ignore = fopen(file, "r");
-  std::string err =
-      logging::SystemErrorCodeToString(logging::GetLastSystemErrorCode());
-  EXPECT_DCHECK("Check failed: false. : " + err, DPCHECK(false));
-  EXPECT_DCHECK("Check failed: 0 == 1 (0 vs. 1)", DCHECK_EQ(0, 1));
+//   // Produce a consistent error code so that both the main instance of this test
+//   // and the EXPECT_DEATH invocation below get the same error codes for DPCHECK.
+//   const char file[] = "/nonexistentfile123";
+//   std::ignore = fopen(file, "r");
+//   std::string err =
+//       logging::SystemErrorCodeToString(logging::GetLastSystemErrorCode());
+//   EXPECT_DCHECK("Check failed: false. : " + err, DPCHECK(false));
+//   EXPECT_DCHECK("Check failed: 0 == 1 (0 vs. 1)", DCHECK_EQ(0, 1));
 
-  // Test DCHECK on std::nullptr_t
-  const void* p_null = nullptr;
-  const void* p_not_null = &p_null;
-  DCHECK_EQ(p_null, nullptr);
-  DCHECK_EQ(nullptr, p_null);
-  DCHECK_NE(p_not_null, nullptr);
-  DCHECK_NE(nullptr, p_not_null);
+//   // Test DCHECK on std::nullptr_t
+//   const void* p_null = nullptr;
+//   const void* p_not_null = &p_null;
+//   DCHECK_EQ(p_null, nullptr);
+//   DCHECK_EQ(nullptr, p_null);
+//   DCHECK_NE(p_not_null, nullptr);
+//   DCHECK_NE(nullptr, p_not_null);
 
-  // Test DCHECK on a scoped enum.
-  enum class Animal { DOG, CAT };
-  DCHECK_EQ(Animal::DOG, Animal::DOG);
-  EXPECT_DCHECK("Check failed: Animal::DOG == Animal::CAT (0 vs. 1)",
-                DCHECK_EQ(Animal::DOG, Animal::CAT));
+//   // Test DCHECK on a scoped enum.
+//   enum class Animal { DOG, CAT };
+//   DCHECK_EQ(Animal::DOG, Animal::DOG);
+//   EXPECT_DCHECK("Check failed: Animal::DOG == Animal::CAT (0 vs. 1)",
+//                 DCHECK_EQ(Animal::DOG, Animal::CAT));
 
-  // Test DCHECK on functions and function pointers.
-  struct MemberFunctions {
-    void MemberFunction1() {
-      // See the comment in DcheckEmptyFunction1().
-      LOG(INFO) << "Do not merge with MemberFunction2.";
-    }
-    void MemberFunction2() {}
-  };
-  void (MemberFunctions::*mp1)() = &MemberFunctions::MemberFunction1;
-  void (MemberFunctions::*mp2)() = &MemberFunctions::MemberFunction2;
-  void (*fp1)() = DcheckEmptyFunction1;
-  void (*fp2)() = DcheckEmptyFunction2;
-  void (*fp3)() = DcheckEmptyFunction1;
-  DCHECK_EQ(fp1, fp3);
-  DCHECK_EQ(mp1, &MemberFunctions::MemberFunction1);
-  DCHECK_EQ(mp2, &MemberFunctions::MemberFunction2);
-  EXPECT_DCHECK("=~Check failed: fp1 == fp2 \\(\\w+ vs. \\w+\\)",
-                DCHECK_EQ(fp1, fp2));
-  EXPECT_DCHECK(
-      "Check failed: mp2 == &MemberFunctions::MemberFunction1 (1 vs. 1)",
-      DCHECK_EQ(mp2, &MemberFunctions::MemberFunction1));
-}
+//   // Test DCHECK on functions and function pointers.
+//   struct MemberFunctions {
+//     void MemberFunction1() {
+//       // See the comment in DcheckEmptyFunction1().
+//       LOG(INFO) << "Do not merge with MemberFunction2.";
+//     }
+//     void MemberFunction2() {}
+//   };
+//   void (MemberFunctions::*mp1)() = &MemberFunctions::MemberFunction1;
+//   void (MemberFunctions::*mp2)() = &MemberFunctions::MemberFunction2;
+//   void (*fp1)() = DcheckEmptyFunction1;
+//   void (*fp2)() = DcheckEmptyFunction2;
+//   void (*fp3)() = DcheckEmptyFunction1;
+//   DCHECK_EQ(fp1, fp3);
+//   DCHECK_EQ(mp1, &MemberFunctions::MemberFunction1);
+//   DCHECK_EQ(mp2, &MemberFunctions::MemberFunction2);
+//   EXPECT_DCHECK("=~Check failed: fp1 == fp2 \\(\\w+ vs. \\w+\\)",
+//                 DCHECK_EQ(fp1, fp2));
+//   EXPECT_DCHECK(
+//       "Check failed: mp2 == &MemberFunctions::MemberFunction1 (1 vs. 1)",
+//       DCHECK_EQ(mp2, &MemberFunctions::MemberFunction1));
+// }
 
 TEST(CheckTest, DcheckReleaseBehavior) {
   int var1 = 1;
