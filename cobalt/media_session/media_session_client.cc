@@ -219,8 +219,8 @@ void MediaSessionClient::InvokeAction(
   CobaltExtensionMediaSessionActionDetailsInit(details.get(), action);
   DCHECK(media_session_->task_runner_);
   media_session_->task_runner_->PostTask(
-      FROM_HERE, base::BindOnce(&MediaSessionClient::InvokeActionInternal,
-                                AsWeakPtr(), base::Passed(&details)));
+      FROM_HERE, base::Bind(&MediaSessionClient::InvokeActionInternal,
+                            AsWeakPtr(), base::Passed(&details)));
 }
 
 void MediaSessionClient::InvokeAction(
@@ -256,7 +256,7 @@ void MediaSessionClient::InvokeActionInternal(
   DCHECK(!details->fast_seek ||
          details->action == kCobaltExtensionMediaSessionActionSeekto);
   CHECK(media_session_->task_runner_);
-  CHECK(media_session_->task_runner_->BelongsToCurrentThread());
+  CHECK(media_session_->task_runner_->RunsTasksInCurrentSequence());
 
   MediaSession::ActionMap::iterator it = media_session_->action_map_.find(
       ConvertMediaSessionAction(details->action));
