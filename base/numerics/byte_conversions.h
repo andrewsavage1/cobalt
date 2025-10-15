@@ -6,7 +6,6 @@
 #define BASE_NUMERICS_BYTE_CONVERSIONS_H_
 
 #include <array>
-#include <bit>
 #include <cstdint>
 #include <cstring>
 #include <span>
@@ -15,10 +14,35 @@
 #include "base/numerics/basic_ops_impl.h"
 #include "build/build_config.h"
 
+#if !BUILDFLAG(IS_COBALT) || defined(SB_IS_DEFAULT_TC)
+#include <bit>
+#endif
+
 // Chromium only builds and runs on Little Endian machines.
 static_assert(ARCH_CPU_LITTLE_ENDIAN);
 
 namespace base {
+
+namespace {
+
+template <typename To, typename From>
+  requires(sizeof(To) == sizeof(From) && std::is_trivially_copyable_v<To> &&
+           std::is_trivially_copyable_v<From>)
+inline constexpr To BitCast(const From& from) {
+#if !BUILDFLAG(IS_COBALT) || defined(SB_IS_DEFAULT_TC)
+  return std::bit_cast<To>(from);
+#else
+  To to;
+#if defined(__clang__) || defined(__GNUC__)
+  __builtin_memcpy(&to, &from, sizeof(to));
+#else
+  std::memcpy(&to, &from, sizeof(to));
+#endif
+  return to;
+#endif
+}
+
+}  // namespace
 
 // Returns a value with all bytes in |x| swapped, i.e. reverses the endianness.
 // TODO(pkasting): Once C++23 is available, replace with std::byteswap.
@@ -133,7 +157,7 @@ inline constexpr int64_t I64FromNativeEndian(
 // storage, and explicit big endian for network order.
 inline constexpr float FloatFromNativeEndian(
     std::span<const uint8_t, 4u> bytes) {
-  return std::bit_cast<float>(U32FromNativeEndian(bytes));
+  return BitCast<float>(U32FromNativeEndian(bytes));
 }
 // Returns a double with the value in `bytes` interpreted as the native endian
 // encoding of the number for the machine.
@@ -144,7 +168,7 @@ inline constexpr float FloatFromNativeEndian(
 // storage, and explicit big endian for network order.
 inline constexpr double DoubleFromNativeEndian(
     std::span<const uint8_t, 8u> bytes) {
-  return std::bit_cast<double>(U64FromNativeEndian(bytes));
+  return BitCast<double>(U64FromNativeEndian(bytes));
 }
 
 // Returns a uint8_t with the value in `bytes` interpreted as a little-endian
@@ -260,7 +284,7 @@ inline constexpr int64_t I64FromLittleEndian(
 // buffer.
 inline constexpr float FloatFromLittleEndian(
     std::span<const uint8_t, 4u> bytes) {
-  return std::bit_cast<float>(U32FromLittleEndian(bytes));
+  return BitCast<float>(U32FromLittleEndian(bytes));
 }
 // Returns a double with the value in `bytes` interpreted as a little-endian
 // encoding of the integer.
@@ -272,7 +296,7 @@ inline constexpr float FloatFromLittleEndian(
 // buffer.
 inline constexpr double DoubleFromLittleEndian(
     std::span<const uint8_t, 8u> bytes) {
-  return std::bit_cast<double>(U64FromLittleEndian(bytes));
+  return BitCast<double>(U64FromLittleEndian(bytes));
 }
 
 // Returns a uint8_t with the value in `bytes` interpreted as a big-endian
@@ -371,7 +395,7 @@ inline constexpr int64_t I64FromBigEndian(std::span<const uint8_t, 8u> bytes) {
 // that were always in memory, such as when stored in shared-memory (or through
 // IPC) as a byte buffer.
 inline constexpr float FloatFromBigEndian(std::span<const uint8_t, 4u> bytes) {
-  return std::bit_cast<float>(U32FromBigEndian(bytes));
+  return BitCast<float>(U32FromBigEndian(bytes));
 }
 // Returns a double with the value in `bytes` interpreted as a big-endian
 // encoding of the integer.
@@ -382,7 +406,7 @@ inline constexpr float FloatFromBigEndian(std::span<const uint8_t, 4u> bytes) {
 // IPC) as a byte buffer.
 inline constexpr double DoubleFromBigEndian(
     std::span<const uint8_t, 8u> bytes) {
-  return std::bit_cast<double>(U64FromBigEndian(bytes));
+  return BitCast<double>(U64FromBigEndian(bytes));
 }
 
 // Returns a byte array holding the value of a uint8_t encoded as the native
@@ -473,7 +497,7 @@ inline constexpr std::array<uint8_t, 8u> I64ToNativeEndian(int64_t val) {
 // byte buffer. Prefer an explicit little endian when storing data into external
 // storage, and explicit big endian for network order.
 inline constexpr std::array<uint8_t, 4u> FloatToNativeEndian(float val) {
-  return U32ToNativeEndian(std::bit_cast<uint32_t>(val));
+  return U32ToNativeEndian(BitCast<uint32_t>(val));
 }
 // Returns a byte array holding the value of a double encoded as the native
 // endian encoding of the number for the machine.
@@ -483,7 +507,7 @@ inline constexpr std::array<uint8_t, 4u> FloatToNativeEndian(float val) {
 // byte buffer. Prefer an explicit little endian when storing data into external
 // storage, and explicit big endian for network order.
 inline constexpr std::array<uint8_t, 8u> DoubleToNativeEndian(double val) {
-  return U64ToNativeEndian(std::bit_cast<uint64_t>(val));
+  return U64ToNativeEndian(BitCast<uint64_t>(val));
 }
 
 // Returns a byte array holding the value of a uint8_t encoded as the
@@ -583,7 +607,7 @@ inline constexpr std::array<uint8_t, 8u> I64ToLittleEndian(int64_t val) {
 // memory, such as when stored in shared-memory (or passed through IPC) as a
 // byte buffer.
 inline constexpr std::array<uint8_t, 4u> FloatToLittleEndian(float val) {
-  return internal::ToLittleEndian(std::bit_cast<uint32_t>(val));
+  return internal::ToLittleEndian(BitCast<uint32_t>(val));
 }
 // Returns a byte array holding the value of a double encoded as the
 // little-endian encoding of the number.
@@ -594,7 +618,7 @@ inline constexpr std::array<uint8_t, 4u> FloatToLittleEndian(float val) {
 // memory, such as when stored in shared-memory (or passed through IPC) as a
 // byte buffer.
 inline constexpr std::array<uint8_t, 8u> DoubleToLittleEndian(double val) {
-  return internal::ToLittleEndian(std::bit_cast<uint64_t>(val));
+  return internal::ToLittleEndian(BitCast<uint64_t>(val));
 }
 
 // Returns a byte array holding the value of a uint8_t encoded as the big-endian
@@ -694,7 +718,7 @@ inline constexpr std::array<uint8_t, 8u> I64ToBigEndian(int64_t val) {
 // IPC) as a byte buffer. Use the little-endian encoding for storing and reading
 // from storage.
 inline constexpr std::array<uint8_t, 4u> FloatToBigEndian(float val) {
-  return internal::ToLittleEndian(ByteSwap(std::bit_cast<uint32_t>(val)));
+  return internal::ToLittleEndian(ByteSwap(BitCast<uint32_t>(val)));
 }
 // Returns a byte array holding the value of a double encoded as the big-endian
 // encoding of the number.
@@ -705,7 +729,7 @@ inline constexpr std::array<uint8_t, 4u> FloatToBigEndian(float val) {
 // IPC) as a byte buffer. Use the little-endian encoding for storing and reading
 // from storage.
 inline constexpr std::array<uint8_t, 8u> DoubleToBigEndian(double val) {
-  return internal::ToLittleEndian(ByteSwap(std::bit_cast<uint64_t>(val)));
+  return internal::ToLittleEndian(ByteSwap(BitCast<uint64_t>(val)));
 }
 
 }  // namespace base

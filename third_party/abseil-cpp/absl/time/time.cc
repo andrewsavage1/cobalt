@@ -503,5 +503,44 @@ struct tm ToTM(absl::Time t, absl::TimeZone tz) {
   return tm;
 }
 
+#if defined(SB_IS_DEFAULT_TC)
+#define CONST_MODIFIER
+#else
+#define CONST_MODIFIER constexpr
+#endif
+
+ABSL_ATTRIBUTE_CONST_FUNCTION CONST_MODIFIER int64_t ToInt64Nanoseconds(Duration d) {
+  if (time_internal::GetRepHi(d) >= 0 &&
+      time_internal::GetRepHi(d) >> 33 == 0) {
+    return (time_internal::GetRepHi(d) * 1000 * 1000 * 1000) +
+           (time_internal::GetRepLo(d) / time_internal::kTicksPerNanosecond);
+  }
+  return d / Nanoseconds(1);
+}
+
+ABSL_ATTRIBUTE_CONST_FUNCTION CONST_MODIFIER int64_t ToInt64Microseconds(
+    Duration d) {
+  if (time_internal::GetRepHi(d) >= 0 &&
+      time_internal::GetRepHi(d) >> 43 == 0) {
+    return (time_internal::GetRepHi(d) * 1000 * 1000) +
+           (time_internal::GetRepLo(d) /
+            (time_internal::kTicksPerNanosecond * 1000));
+  }
+  return d / Microseconds(1);
+}
+
+ABSL_ATTRIBUTE_CONST_FUNCTION CONST_MODIFIER int64_t ToInt64Milliseconds(
+    Duration d) {
+  if (time_internal::GetRepHi(d) >= 0 &&
+      time_internal::GetRepHi(d) >> 53 == 0) {
+    return (time_internal::GetRepHi(d) * 1000) +
+           (time_internal::GetRepLo(d) /
+            (time_internal::kTicksPerNanosecond * 1000 * 1000));
+  }
+  return d / Milliseconds(1);
+}
+
+#undef CONST_MODIFIER
+
 ABSL_NAMESPACE_END
 }  // namespace absl
