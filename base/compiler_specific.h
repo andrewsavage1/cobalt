@@ -5,6 +5,10 @@
 #ifndef BASE_COMPILER_SPECIFIC_H_
 #define BASE_COMPILER_SPECIFIC_H_
 
+#if !defined(SB_IS_DEFAULT_TC) && defined(STARBOARD) ||  defined(ENABLE_BUILDFLAG_IS_NATIVE_TARGET_BUILD)
+#error Regular base being included
+#endif
+
 #include "build/build_config.h"
 
 #if defined(COMPILER_MSVC) && !defined(__clang__)

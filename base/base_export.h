@@ -5,6 +5,10 @@
 #ifndef BASE_BASE_EXPORT_H_
 #define BASE_BASE_EXPORT_H_
 
+#if !defined(SB_IS_DEFAULT_TC) && defined(STARBOARD) ||  defined(ENABLE_BUILDFLAG_IS_NATIVE_TARGET_BUILD)
+#error Regular base being included
+#endif
+
 #if defined(COMPONENT_BUILD)
 #if defined(WIN32)
 
