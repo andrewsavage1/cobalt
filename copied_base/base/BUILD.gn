@@ -101,6 +101,11 @@ if (is_fuchsia) {
   import("//third_party/fuchsia-sdk/sdk/build/fidl_library.gni")
 }
 
+use_perfetto_client_library = true
+enable_log_error_not_reached = false
+use_runtime_vlog = true
+is_chromeos_lacros = false
+
 # TODO(crbug.com/1280708): Drop toolchain_has_rust and move the C++ parser into
 # components/nacl to just run in-process there. Don't compile base::JSONReader
 # on NaCL at all.
@@ -109,10 +114,10 @@ if (is_fuchsia) {
 # our toolchains: Linux x86 is missing in order to build for Android.
 #
 # Rust to C++ type conversions.
-build_rust_base_conversions = toolchain_has_rust && enable_rust_base_conversions
+build_rust_base_conversions = false
 
 # The Rust implementation of base::JSONReader.
-build_rust_json_reader = toolchain_has_rust && enable_rust_json
+build_rust_json_reader = false
 
 assert(build_rust_base_conversions || !build_rust_json_reader,
        "Cannot enable Rust JSON decoder without also base conversions")
