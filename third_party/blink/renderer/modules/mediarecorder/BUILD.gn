@@ -41,8 +41,11 @@ blink_modules_sources("mediarecorder") {
     "//media/mojo/clients",
     "//media/mojo/mojom",
     "//third_party/blink/renderer/modules/mediastream",
-    "//third_party/libvpx",
     "//third_party/libyuv",
     "//third_party/opus",
   ]
+
+  if (media_use_libvpx) {
+    deps += [ "//third_party/libvpx" ]
+  }
 }

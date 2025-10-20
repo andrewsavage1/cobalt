@@ -390,7 +390,7 @@ if (current_cpu == "arm64" || current_cpu == "arm64e") {
       configs += [ ":libvpx_config" ]
       cflags = [ "-march=armv8.2-a+dotprod+i8mm+sve" ]
       if (cpu_arch_full == "arm64") {
-        sources = libvpx_srcs_arm64_sve
+        # sources = libvpx_srcs_arm64_sve
         deps = [ ":libvpx_arm64_headers" ]
       } else if (cpu_arch_full == "arm64-highbd") {
         sources = libvpx_srcs_arm64_highbd_sve
@@ -600,8 +600,8 @@ static_library("libvpx") {
     deps += [ ":libvpx_intrinsics_neon" ]
   }
   if (current_cpu == "arm64" || current_cpu == "arm64e") {
-    deps += [ ":libvpx_intrinsics_neon_dotprod" ]
-    deps += [ ":libvpx_intrinsics_neon_i8mm" ]
+    # deps += [ ":libvpx_intrinsics_neon_dotprod" ]
+    # deps += [ ":libvpx_intrinsics_neon_i8mm" ]
     if (!is_win) {
       deps += [
         ":libvpx_intrinsics_sve",

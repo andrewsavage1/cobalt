@@ -546,7 +546,7 @@ rtc_library("webrtc_libvpx_interface") {
     "codecs/interface/libvpx_interface.h",
   ]
   deps = [ "../../rtc_base:checks" ]
-  if (rtc_build_libvpx) {
+  if (rtc_build_libvpx && media_use_libvpx) {
     deps += [ rtc_libvpx_dir ]
   }
 }
@@ -614,7 +614,7 @@ rtc_library("webrtc_vp8") {
     "//third_party/abseil-cpp/absl/strings:string_view",
     "//third_party/libyuv",
   ]
-  if (rtc_build_libvpx) {
+  if (rtc_build_libvpx && media_use_libvpx) {
     deps += [ rtc_libvpx_dir ]
   }
 }
@@ -748,7 +748,7 @@ rtc_library("webrtc_vp9") {
     "//third_party/abseil-cpp/absl/strings",
     "//third_party/libyuv",
   ]
-  if (rtc_build_libvpx) {
+  if (rtc_build_libvpx && media_use_libvpx) {
     deps += [ rtc_libvpx_dir ]
   }
 }
