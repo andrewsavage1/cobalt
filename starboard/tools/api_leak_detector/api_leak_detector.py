@@ -286,6 +286,7 @@ def FindLibraries(config_path):
   libs_to_ignore = LoadLibrariesToIgnore()
 
   libs = []
+  # return libs
   for root, dirs, filenames in os.walk(config_path):
     # Only look in toplevel obj directory.
     if root == config_path:
@@ -566,7 +567,7 @@ def main():
   allowed_c99_symbols = LoadAllowedC99Symbols()
 
   print(f'Building {config_dir} if necessary...', file=sys.stderr)
-  RunCommand(['autoninja', '-C', config_path, args.target])
+  # RunCommand(['autoninja', '-C', config_path, args.target])
 
   # Use the library at lib.unstripped if available, as if that's around it
   # means the top-level one has been stripped of symbols.
