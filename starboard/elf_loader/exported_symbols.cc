@@ -328,6 +328,7 @@ ExportedSymbols::ExportedSymbols() {
   REGISTER_WRAPPER(fchown);
   REGISTER_WRAPPER(fcntl);
   REGISTER_WRAPPER(fstat);
+  REGISTER_WRAPPER(fstatat);
   REGISTER_WRAPPER(freeaddrinfo);
   REGISTER_WRAPPER(ftruncate);
   REGISTER_WRAPPER(gai_strerror);
