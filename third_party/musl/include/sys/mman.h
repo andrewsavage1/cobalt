@@ -142,7 +142,8 @@ int shm_open (const char *, int, mode_t);
 int shm_unlink (const char *);
 
 #if defined(_LARGEFILE64_SOURCE)
-#define mmap64 mmap
+// #define mmap64 mmap
+void* mmap64(void* addr, size_t len, int prot, int flags, int fildes, off_t off);
 #define off64_t off_t
 #endif
 

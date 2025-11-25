@@ -198,7 +198,8 @@ pid_t gettid(void);
 #endif
 
 #if defined(_LARGEFILE64_SOURCE)
-#define lseek64 lseek
+// #define lseek64 lseek
+off_t lseek(int fildes, off_t offset, int whence);
 #define pread64 pread
 #define pwrite64 pwrite
 #define truncate64 truncate
